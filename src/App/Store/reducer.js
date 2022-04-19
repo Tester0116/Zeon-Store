@@ -1,25 +1,23 @@
-// import {
-//   WITHDRAW_RATES,
-// } from './action';
+import { FAVOURITE } from './action'
 
-// const initialState = {
-//   fiatKurse: '',
-// };
+const initialState = {
+  getFavourite: [],
+}
 
-// export default function appReducer(state = initialState, action) {
-//   const {type, payload} = action;
+export default function appReducer(state = initialState, action) {
+  const { type, payload } = action
 
-//   switch (type) {
-//     // ------------------
-//     case GET_FAQ: {
-//       return {
-//         ...state,
-//         questions: payload,
-//       };
-//     }
-//     // ------------------
-//     default: {
-//       return state;
-//     }
-//   }
-// }
+  switch (type) {
+    // ------------------
+    case FAVOURITE: {
+      return {
+        ...state,
+        getFavourite: payload,
+      }
+    }
+    // ------------------
+    default: {
+      return state
+    }
+  }
+}

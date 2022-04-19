@@ -1,9 +1,9 @@
-// export const USER = 'USER';
+export const FAVOURITE = 'FAVOURITE'
 
-// export function getUser(data) {
-//   return {
-//     type: USER,
-//     payload: data,
-//   };
-// }
-// // ----------------------------
+export function setFavourite(data) {
+  return {
+    type: FAVOURITE,
+    payload: data,
+  }
+}
+// ----------------------------

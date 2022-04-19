@@ -1,8 +1,8 @@
 import React from 'react'
 
-import './index.scss'
+import './_index.scss'
 
-function Header() {
+const Header = () => {
   return (
     <div className="parent-block">
       <div className="container">
@@ -17,7 +17,7 @@ function Header() {
           </div>
           <div>
             <span>Тел: </span>
-            <a style={{ color: '#393939' }} href="tel:+996706669951">
+            <a style={{ color: '#393939' }} href="tel:+996 000 00 00 00">
               +996 000 00 00 00
             </a>
           </div>

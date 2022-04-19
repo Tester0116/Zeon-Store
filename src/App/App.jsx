@@ -1,20 +1,17 @@
 import React from 'react'
 
-import '../App.scss'
+import '../_App.scss'
 import Footer from './Components/Footer'
 import Header from './Components/Header'
+import Home from './Screens/Home'
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header>
         <Header />
       </header>
-      <br />
-      <br />
-      <div className="container">Heey!!!</div>
-      <br />
-      <br />
+      <Home />
       <footer>
         <Footer />
       </footer>

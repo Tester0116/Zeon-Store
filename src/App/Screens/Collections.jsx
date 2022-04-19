@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Collections() {
+const Collections = () => {
   return <div>Collections</div>
 }
 
