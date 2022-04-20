@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, Outlet } from 'react-router-dom'
 
 import './_index.scss'
 
@@ -9,11 +10,15 @@ const Header = () => {
         {/* -------------------------- */}
         <div className="header-first__block">
           <div>
-            <a href="#">О нас</a>
-            <a className="mh24" href="#">
-              Коллекции
-            </a>
-            <a href="#">Новости</a>
+            <Link to="about">
+              <a>О нас</a>
+            </Link>
+            <Link to="collections">
+              <a className="mh24">Коллекции</a>
+            </Link>
+            <Link to="news">
+              <a>Новости</a>
+            </Link>
           </div>
           <div>
             <span>Тел: </span>
@@ -28,12 +33,14 @@ const Header = () => {
       {/* -------------------------- */}
       <div className="container">
         <div className="header-second__block">
-          <img
-            width={162}
-            height={70}
-            alt="logo"
-            src={require('../../assets/zeon-icon.png')}
-          />
+          <Link to="/">
+            <img
+              width={162}
+              height={70}
+              alt="logo"
+              src={require('../../assets/zeon-icon.png')}
+            />
+          </Link>
           <div className="header-second__block-inputdiv">
             <input className="header-second__block-input" placeholder="Поиск" />
             <a className="header-second__block-inputicon">

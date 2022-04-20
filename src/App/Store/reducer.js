@@ -1,4 +1,4 @@
-import { FAVOURITE } from './action'
+import { SET_FAVOURITE, UNSET_FAVOURITE } from './action'
 
 const initialState = {
   getFavourite: [],
@@ -9,12 +9,14 @@ export default function appReducer(state = initialState, action) {
 
   switch (type) {
     // ------------------
-    case FAVOURITE: {
+    case 'SET_FAVOURITE':
+      return { ...state, getFavourite: [...state.getFavourite, payload] }
+    case 'UNSET_FAVOURITE':
       return {
         ...state,
-        getFavourite: payload,
+        getFavourite: state.getFavourite.filter((fav) => fav.id !== payload),
       }
-    }
+
     // ------------------
     default: {
       return state

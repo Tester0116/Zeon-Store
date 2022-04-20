@@ -1,9 +1,10 @@
 import React from 'react'
 
-import '../_App.scss'
 import Footer from './Components/Footer'
 import Header from './Components/Header'
 import Home from './Screens/Home'
+
+import '../_App.scss'
 
 const App = () => {
   return (
@@ -11,7 +12,9 @@ const App = () => {
       <header>
         <Header />
       </header>
-      <Home />
+      <main>
+        <Home />
+      </main>
       <footer>
         <Footer />
       </footer>

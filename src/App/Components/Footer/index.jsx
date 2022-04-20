@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import './_index.scss'
 
@@ -23,28 +24,25 @@ const Footer = () => {
               <span className="footer-block__colums-linkstitle">Компания</span>
               <ul>
                 <li>
-                  <a
-                    href="https://www.instagram.com/zeon.ithub/"
-                    target="_blank"
-                  >
-                    <span>О нас</span>
-                  </a>
+                  <Link to="about">
+                    <a>
+                      <span>О нас</span>
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://www.instagram.com/zeon.ithub/"
-                    target="_blank"
-                  >
-                    <span>Новости</span>
-                  </a>
+                  <Link to="news">
+                    <a>
+                      <span>Новости</span>
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://www.instagram.com/zeon.ithub/"
-                    target="_blank"
-                  >
-                    <span>Помощь</span>
-                  </a>
+                  <Link to="support">
+                    <a>
+                      <span>Помощь</span>
+                    </a>
+                  </Link>
                 </li>
               </ul>
             </div>
