@@ -9,12 +9,13 @@ export default function appReducer(state = initialState, action) {
 
   switch (type) {
     // ------------------
-    case 'SET_FAVOURITE':
+    case SET_FAVOURITE:
       return { ...state, getFavourite: [...state.getFavourite, payload] }
-    case 'UNSET_FAVOURITE':
+    // ------------------
+    case UNSET_FAVOURITE:
       return {
         ...state,
-        getFavourite: state.getFavourite.filter((fav) => fav.id !== payload),
+        getFavourite: state.getFavourite.filter((fav) => fav.id !== payload.id),
       }
 
     // ------------------

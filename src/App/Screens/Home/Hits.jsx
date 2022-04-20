@@ -16,27 +16,15 @@ const Hits = () => {
   // const total = cart.reduce(addition, 0)
 
   const checkFavourite = (item) => {
-    // dispatch(setFavourite(item))
-    // console.log(item.id === Object.values(getFavourite)[item.id - 1].id)
-    console.log(Object.values(getFavourite))
-    // try {
     if (Boolean(getFavourite.length !== 0)) {
-      //   const itemId = Object.values(getFavourite)[item.id - 1].id
-      console.log('ok!', getFavourite)
-      if (
-        Boolean(item.id === Object.values(getFavourite)[Number(item.id) - 1].id)
-      ) {
-        // dispatch({ type: 'UNSET_FAVOURITE', payload: item })
-        //   } else {
-        console.log('unset')
-        //     dispatch(setFavourite(item))
+      if (Boolean(item.id === getFavourite[item.id - 1]?.id)) {
+        dispatch(unSetFavourite(item))
+      } else {
+        dispatch(setFavourite(item))
       }
     } else {
-      console.log('SETTING')
-      dispatch({ type: 'SET_FAVOURITE', payload: item })
+      dispatch(setFavourite(item))
     }
-    // } catch (error) {
-    // }
   }
   return (
     <div className="hit-container">
