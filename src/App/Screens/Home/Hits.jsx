@@ -14,27 +14,12 @@ const Hits = () => {
   )
 
   const checkFavourite = (item, key) => {
-    const t = []
-    console.log('item.id: ', item.id)
-    console.log('getFavid: ', getFavourite[item.id]?.id)
-    console.log('key: ', key)
-    console.log(
-      'getFavid: ',
-      getFavourite.find((el) => el === item.id)
-    )
-    // if (Boolean(getFavourite.length !== 0)) {
-    //   if (Boolean(item.id === getFavourite[key]?.id)) {
-    //     dispatch(unSetFavourite(item))
-    //     console.log('unsetting', item)
-    //   } else {
-    //     dispatch(setFavourite(item))
-    //     console.log('key', getFavourite[key]?.id)
-    //     console.log('favId: ', getFavourite[item.id]?.id)
-    //   }
-    // } else {
-    // dispatch(setFavourite(item))
-    //   console.log('setting last', item)
-    // }
+    const index = getFavourite?.map((i, k) => i.id)
+
+    if (Boolean(getFavourite.length !== 0)) {
+      if (Boolean(index.includes(item.id))) dispatch(unSetFavourite(item))
+      else dispatch(setFavourite(item))
+    } else dispatch(setFavourite(item))
   }
   const sendData = async () => {
     // await db
@@ -83,7 +68,10 @@ const Hits = () => {
                         alt="block__discount"
                       />
                       <span className="hit-block__discount-procent">
-                        {Math.round((item.price / item.discount) * 100)}%
+                        {Math.round(
+                          ((item.price - item.discount) / item.discount) * 100
+                        )}
+                        %
                       </span>
                     </>
                   )}
@@ -91,7 +79,7 @@ const Hits = () => {
                     style={{ cursor: 'pointer' }}
                     onClick={() => checkFavourite(item, key)}
                     src={
-                      getFavourite[item.id - 1]?.id === item.id
+                      getFavourite?.map((i, k) => i.id).includes(item.id)
                         ? require('../../assets/filled-heart.png')
                         : require('../../assets/unfill-heart.png')
                     }
