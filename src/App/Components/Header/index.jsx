@@ -1,11 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link, Outlet } from 'react-router-dom'
 
 import './_index.scss'
 
 const Header = () => {
+  const { getFavourite } = useSelector((store) => store.appReducer)
   return (
-    <div className="parent-block">
+    <header className="parent-block">
       <div className="container">
         {/* -------------------------- */}
         <div className="header-first__block">
@@ -54,10 +56,13 @@ const Header = () => {
           </div>
           <div className="fdrow posr">
             <div className="header-second__block-favourite header-second__block-favouritefirst">
-              <img
-                alt="favourite"
-                src={require('../../assets/favourite.png')}
-              />
+              <div className="posr">
+                {Boolean(getFavourite.length !== 0) && <span />}
+                <img
+                  alt="favourite"
+                  src={require('../../assets/favourite.png')}
+                />
+              </div>
               <a>Избранное</a>
             </div>
             <div className="header-second__block-favourite">
@@ -68,7 +73,7 @@ const Header = () => {
         </div>
       </div>
       {/* -------------------------- */}
-    </div>
+    </header>
   )
 }
 

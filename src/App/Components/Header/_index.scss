@@ -83,6 +83,15 @@
       background-color: #d3d3d3;
     }
   }
+  &__block-favourite span {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: red;
+  }
   &__block-favourite img {
     width: 23px;
     height: 21px;

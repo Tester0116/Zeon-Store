@@ -1,12 +1,12 @@
 // ##### SCROLL STYLE START #####
+.opacity-1 {
+  opacity: 1;
+}
 .opacity-0 {
   opacity: 0;
+  transition-duration: 150ms;
 }
-.visible {
-  opacity: 1;
-}
-.opacity1 {
-  opacity: 1;
+.top-first-block {
   padding: 3px;
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -28,6 +28,38 @@
   &:focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
+  }
+}
+.top-second-block {
+  top: 3px;
+  left: -210px;
+  position: absolute;
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  display: flex;
+  flex-direction: row;
+  &__top-icon {
+    width: 44px;
+    height: 44px;
+  }
+  &__close-icon {
+    margin-top: 20px;
+    width: 38px;
+    height: 38px;
+  }
+  & > :first-child {
+    //getting div className='fdrow'
+    padding-top: 60px;
+    margin-left: -20px;
+    margin-right: 10px;
+  }
+  & > :first-child > a > img {
+    cursor: pointer;
+    align-self: flex-end;
+    width: 44px;
+    height: 44px;
+    margin-right: 6px;
   }
 }
 // ##### SCROLL STYLE END #####

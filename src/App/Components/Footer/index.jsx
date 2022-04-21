@@ -5,7 +5,7 @@ import './_index.scss'
 
 const Footer = () => {
   return (
-    <section className="footer-block">
+    <footer className="footer-block">
       <div className="container">
         {/* -------------------------- */}
         <div className="footer-block__colums">
@@ -129,7 +129,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </section>
+    </footer>
   )
 }
 

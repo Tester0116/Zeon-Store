@@ -5,6 +5,7 @@ import './_index.scss'
 
 export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false)
+  const [SmsModalVisible, setSmsModalVisible] = useState(false)
   const [ModalVisible, setModalVisible] = useState(false)
   // ---------------------------------------------------
   const [name, setName] = useState('')
@@ -19,15 +20,14 @@ export const ScrollToTop = () => {
     }
   }, [])
 
-  const classNames = (...classes) => {
-    return classes.filter(Boolean).join(' ')
-  }
+  const classNames = (...classes) => classes.filter(Boolean).join(' ')
 
   const toggleVisibility = () => {
-    if (window.pageYOffset > 400) {
+    if (window.pageYOffset > 150) {
       setIsVisible(true)
     } else {
       setIsVisible(false)
+      setSmsModalVisible(false)
     }
   }
 
@@ -58,7 +58,9 @@ export const ScrollToTop = () => {
   }
 
   return (
-    <div style={{ position: 'fixed', right: '100px', top: '10%', zIndex: 99 }}>
+    <div
+      style={{ position: 'fixed', right: '50px', bottom: '50px', zIndex: 99 }}
+    >
       {ModalVisible && (
         <form onSubmit={(e) => e.preventDefault()} className="modal-block">
           <div className="modal-block__divblock">
@@ -125,7 +127,55 @@ export const ScrollToTop = () => {
           </div>
         </form>
       )}
-      <div className={classNames(isVisible ? 'opacity1' : 'opacity-0')}>
+      <div
+        className={classNames(
+          SmsModalVisible ? 'opacity-1' : 'opacity-0',
+          'top-second-block'
+        )}
+      >
+        <div className="fdrow">
+          <a href="https://www.instagram.com/zeon.ithub/" target="_blank">
+            <img
+              alt="telegram icon"
+              onClick={scrollToTop}
+              src={require('../../assets/telegramTop-icon.png')}
+            />
+          </a>
+          <a href="https://www.instagram.com/zeon.ithub/" target="_blank">
+            <img
+              alt="whatsapp icon"
+              src={require('../../assets/whatsappTop-icon.png')}
+            />
+          </a>
+          <a>
+            <img
+              alt="phone icon"
+              onClick={() => setModalVisible(true)}
+              src={require('../../assets/phoneTop-icon.png')}
+            />
+          </a>
+        </div>
+        <div className="fdcol">
+          <img
+            alt="arrow up icon"
+            className="top-second-block__top-icon"
+            onClick={scrollToTop}
+            src={require('../../assets/scrollTop-icon.png')}
+          />
+          <img
+            alt="arrow up icon"
+            className="top-second-block__close-icon"
+            onClick={() => setSmsModalVisible(false)}
+            src={require('../../assets/close-icon.png')}
+          />
+        </div>
+      </div>
+      <div
+        className={classNames(
+          isVisible ? 'opacity-1' : 'opacity-0',
+          'top-first-block'
+        )}
+      >
         <img
           alt="arrow up icon"
           style={{ cursor: 'pointer' }}
@@ -135,7 +185,7 @@ export const ScrollToTop = () => {
         <img
           alt="sms icon"
           style={{ cursor: 'pointer' }}
-          onClick={() => setModalVisible(true)}
+          onClick={() => setSmsModalVisible(true)}
           src={require('../../assets/sms-icon.png')}
         />
       </div>

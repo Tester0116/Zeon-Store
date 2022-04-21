@@ -1,6 +1,7 @@
-import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import React, { useState } from 'react'
 import { Autoplay, Pagination, Keyboard, Mousewheel } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { useSelector } from 'react-redux'
 
 import { ScrollToTop } from '../../Components/ScrollToTop'
 import Hits from './Hits'
@@ -9,54 +10,48 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import './_hits.scss'
+import LoadingSpinner from '../../Components/Spinner'
 
-const index = () => {
-  const DATA = [
-    {
-      img: require('../../assets/swiper-example.png'),
-      link: 'https://clck.ru/fqsjJ',
-    },
-    {
-      img: require('../../assets/swiper-example.png'),
-      link: 'https://clck.ru/fqsjJ',
-    },
-    {
-      img: require('../../assets/swiper-example.png'),
-      link: 'https://clck.ru/fqsjJ',
-    },
-    {
-      img: require('../../assets/swiper-example.png'),
-      link: 'https://clck.ru/fqsjJ',
-    },
-  ]
+const HomeIndex = () => {
+  const { getHomeBanner } = useSelector((state) => state.appReducer)
+  const [activeIndex, setactiveIndex] = useState(0)
 
   return (
     <div className="container">
       {/* ------------ */}
-      <Swiper
-        spaceBetween={10}
-        centeredSlides={true}
-        autoplay={{
-          delay: 3500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        className="mySwiper"
-        // mousewheel={true}
-        style={{ marginTop: '15px' }}
-        keyboard={true}
-        modules={[Pagination, Mousewheel, Keyboard, Autoplay]}
-      >
-        {DATA.map((url, key) => (
-          <SwiperSlide key={key}>
-            <a href={url.link} target="_blank">
-              <img src={url.img} />
-            </a>
-          </SwiperSlide>
+      {Boolean(getHomeBanner.length !== 0) && (
+        <Swiper
+          centeredSlides={true}
+          autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+          }}
+          onSlideChange={(slide) => setactiveIndex(slide.activeIndex)}
+          className="mySwiper"
+          // mousewheel={true}
+          style={{ marginTop: '15px' }}
+          keyboard={true}
+          modules={[Pagination, Mousewheel, Keyboard, Autoplay]}
+        >
+          {getHomeBanner.map((url, key) => (
+            <SwiperSlide key={key}>
+              <a href={url.hrefUrl} target="_blank">
+                <img src={url.bannerUrl} alt="banner img" />
+              </a>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+      <div className="dots">
+        {getHomeBanner.map((i, k) => (
+          <span
+            key={k}
+            style={{
+              backgroundColor: activeIndex === k ? '#1D1D1B' : 'transparent',
+            }}
+          ></span>
         ))}
-      </Swiper>
+      </div>
       {/* ------------ */}
       <ScrollToTop />
       {/* ------------ */}
@@ -65,4 +60,4 @@ const index = () => {
   )
 }
 
-export default index
+export default HomeIndex
