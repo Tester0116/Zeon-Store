@@ -96,18 +96,13 @@
     padding: 32px 38px;
     position: relative;
     & > h5 {
-      font-family: 'Montserrat';
-      font-weight: 600;
-      font-size: 20px;
+      font: 600 20px 'Montserrat';
       line-height: 125%;
       color: #393939;
       margin-bottom: 10px;
     }
     & > span {
-      font-family: 'Montserrat';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 18px;
+      font: 400 18px 'Montserrat';
       line-height: 150%;
       color: #393939;
     }
@@ -133,12 +128,10 @@
       padding: 14px;
       padding-left: 44px;
       border: 1px solid rgba(31, 31, 31, 0.08);
-      font-family: 'Montserrat';
-      font-size: 14px;
+      font: 14px 'Montserrat';
       color: #393939;
       &::placeholder {
-        font-family: 'Montserrat';
-        font-size: 14px;
+        font: 14px 'Montserrat';
         color: #bebebe;
       }
     }
@@ -149,9 +142,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 14px;
+    font: 500 14px 'Montserrat';
     color: white;
     border: none;
     margin-top: 12px;
@@ -166,18 +157,14 @@
       height: 60px;
     }
     & > h5 {
-      font-family: 'Montserrat';
-      font-weight: 500;
-      font-size: 22px;
+      font: 500 22px 'Montserrat';
       line-height: 100%;
       color: #393939;
       margin-top: 14px;
       margin-bottom: 8px;
     }
     & > span {
-      font-family: 'Montserrat';
-      font-style: normal;
-      font-size: 14px;
+      font: 14px 'Montserrat';
       line-height: 150%;
       color: #393939;
       text-align: center;

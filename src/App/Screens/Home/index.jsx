@@ -3,14 +3,15 @@ import { Autoplay, Pagination, Keyboard, Mousewheel } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useSelector } from 'react-redux'
 
-import { ScrollToTop } from '../../Components/ScrollToTop'
+import ScrollToTop from '../../Components/ScrollToTop'
+import Collections from './Collections'
+import News from './News'
 import Hits from './Hits'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import './_hits.scss'
-import LoadingSpinner from '../../Components/Spinner'
 
 const HomeIndex = () => {
   const { getHomeBanner } = useSelector((state) => state.appReducer)
@@ -35,7 +36,7 @@ const HomeIndex = () => {
         >
           {getHomeBanner.map((url, key) => (
             <SwiperSlide key={key}>
-              <a href={url.hrefUrl} target="_blank">
+              <a href={url.hrefUrl} target="_blank" rel="noreferrer">
                 <img src={url.bannerUrl} alt="banner img" />
               </a>
             </SwiperSlide>
@@ -56,6 +57,11 @@ const HomeIndex = () => {
       <ScrollToTop />
       {/* ------------ */}
       <Hits />
+      {/* ------------ */}
+      <News />
+      {/* ------------ */}
+      <Collections />
+      {/* ------------ */}
     </div>
   )
 }

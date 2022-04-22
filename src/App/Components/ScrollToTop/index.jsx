@@ -3,7 +3,7 @@ import InputMask from 'react-input-mask'
 
 import './_index.scss'
 
-export const ScrollToTop = () => {
+const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [SmsModalVisible, setSmsModalVisible] = useState(false)
   const [ModalVisible, setModalVisible] = useState(false)
@@ -38,10 +38,6 @@ export const ScrollToTop = () => {
     })
   }
 
-  const nameChange = (e) => {
-    setName(e.target.value)
-  }
-
   const formSend = () => {
     if (name.length === 0) {
       return
@@ -66,7 +62,10 @@ export const ScrollToTop = () => {
           <div className="modal-block__divblock">
             {formSended ? (
               <div className="modal-block__formsended-block">
-                <img src={require('../../assets/thank-icon.png')} />
+                <img
+                  src={require('../../assets/thank-icon.png')}
+                  alt="thank icon"
+                />
                 <h5>Спасибо!</h5>
                 <span>
                   Ваша заявка была принята ожидайте, скоро Вам перезвонят
@@ -134,14 +133,22 @@ export const ScrollToTop = () => {
         )}
       >
         <div className="fdrow">
-          <a href="https://www.instagram.com/zeon.ithub/" target="_blank">
+          <a
+            href="https://www.instagram.com/zeon.ithub/"
+            target="_blank"
+            rel="noreferrer"
+          >
             <img
               alt="telegram icon"
               onClick={scrollToTop}
               src={require('../../assets/telegramTop-icon.png')}
             />
           </a>
-          <a href="https://www.instagram.com/zeon.ithub/" target="_blank">
+          <a
+            rel="noreferrer"
+            href="https://www.instagram.com/zeon.ithub/"
+            target="_blank"
+          >
             <img
               alt="whatsapp icon"
               src={require('../../assets/whatsappTop-icon.png')}
@@ -192,3 +199,5 @@ export const ScrollToTop = () => {
     </div>
   )
 }
+
+export default ScrollToTop

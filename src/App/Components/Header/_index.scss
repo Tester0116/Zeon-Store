@@ -2,6 +2,7 @@
   width: 100%;
   height: 153px;
   background-color: white;
+  margin-bottom: 60px;
 }
 
 .header-first {
@@ -13,14 +14,12 @@
     justify-content: space-between;
 
     a {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 17px;
+      font: 17px 'Montserrat';
       line-height: 21px;
     }
     span {
-      font-family: 'Montserrat', sans-serif;
+      font: 17px 'Montserrat';
       color: #979797;
-      font-size: 17px;
       line-height: 21px;
     }
   }
@@ -52,8 +51,7 @@
     position: relative;
     background-color: #f8f8f8;
     &::placeholder {
-      font-family: 'Montserrat';
-      font-size: 16px;
+      font: 16px 'Montserrat';
       line-height: 20px;
       color: #858f9b;
     }
@@ -97,11 +95,35 @@
     height: 21px;
   }
   &__block-favourite a {
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 16px;
+    font: 500 16px 'Montserrat';
     line-height: 20px;
     color: #393939;
     margin-left: 10px;
+  }
+}
+
+.breadcrumb-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+  margin-top: -5px;
+  padding: 21px 100px;
+  background-color: white;
+  & > span {
+    cursor: pointer;
+    color: #393939;
+    font: 500 14px 'Montserrat';
+    line-height: 17px;
+    &::after {
+      content: '/';
+      margin: 0 16px;
+    }
+  }
+  & > :last-child {
+    color: #979797;
+  }
+  & > :last-child::after {
+    display: none;
   }
 }

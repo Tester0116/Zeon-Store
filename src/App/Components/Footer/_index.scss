@@ -16,8 +16,7 @@
   }
   &__colums-logo span {
     margin-top: 36px;
-    font-family: 'Montserrat';
-    font-size: 14px;
+    font: 14px 'Montserrat';
     color: #b9b9b9;
   }
   &__colums-linksblock {
@@ -26,9 +25,7 @@
     gap: 20px;
   }
   &__colums-linkstitle {
-    font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 16px;
+    font: 600 16px 'Montserrat';
     line-height: 20px;
     color: #e2e2e2;
     // margin-bottom: 16px;
@@ -46,8 +43,7 @@
     margin-right: 7px;
   }
   &__colums-links ul li a {
-    font-family: 'Montserrat';
-    font-size: 14px;
+    font: 14px 'Montserrat';
     color: #ffffff;
     align-items: center;
     display: flex;

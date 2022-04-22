@@ -1,11 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import './_index.scss'
 
-const Header = () => {
+const Header = ({ breadCrums }) => {
   const { getFavourite } = useSelector((store) => store.appReducer)
+  const navigate = useNavigate()
   return (
     <header className="parent-block">
       <div className="container">
@@ -31,7 +32,7 @@ const Header = () => {
         </div>
       </div>
       {/* ---------- Line ---------- */}
-      <div className="header-line"></div>
+      <div className="header-line" />
       {/* -------------------------- */}
       <div className="container">
         <div className="header-second__block">
@@ -72,6 +73,22 @@ const Header = () => {
           </div>
         </div>
       </div>
+      {/* -------------------------- */}
+
+      {/* ---------- Line ---------- */}
+      {breadCrums && (
+        <>
+          <div className="header-line" />
+          {/* -------------------------- */}
+          <div className="breadcrumb-block">
+            <span onClick={() => navigate(-1)}>Главная</span>
+
+            {breadCrums.map((crum, key) => (
+              <span key={crum.id}>{crum.text}</span>
+            ))}
+          </div>
+        </>
+      )}
       {/* -------------------------- */}
     </header>
   )

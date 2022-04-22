@@ -1,16 +1,24 @@
 import {
-  HIT_DATA,
-  HOME_BANNER,
-  SET_FAVOURITE,
-  SPIN_LOAD,
+  COLLECTIONS_DATA,
   UNSET_FAVOURITE,
+  DETAILPAGE_DATA,
+  SET_FAVOURITE,
+  HOME_BANNER,
+  SET_ABOUT,
+  SPIN_LOAD,
+  NEWS_DATA,
+  HIT_DATA,
 } from './action'
 
 const initialState = {
-  getFavourite: [],
-  getHitData: [],
+  getCollectionsData: [],
   getHomeBanner: [],
+  getDetailData: [],
+  getFavourite: [],
+  getNewsData: [],
+  getHitData: [],
   getLoad: true,
+  getAbout: [],
 }
 
 export default function appReducer(state = initialState, action) {
@@ -18,20 +26,32 @@ export default function appReducer(state = initialState, action) {
 
   switch (type) {
     // ------------------
-    case SET_FAVOURITE:
-      return { ...state, getFavourite: [...state.getFavourite, payload] }
-    // ------------------
     case UNSET_FAVOURITE:
       return {
         ...state,
         getFavourite: state.getFavourite.filter((fav) => fav.id !== payload.id),
       }
     // ------------------
-    case HIT_DATA:
-      return { ...state, getHitData: payload }
+    case SET_FAVOURITE:
+      return { ...state, getFavourite: [...state.getFavourite, payload] }
+    // ------------------
+    case COLLECTIONS_DATA:
+      return { ...state, getCollectionsData: payload }
+    // ------------------
+    case DETAILPAGE_DATA:
+      return { ...state, getDetailData: payload }
     // ------------------
     case HOME_BANNER:
       return { ...state, getHomeBanner: payload }
+    // ------------------
+    case NEWS_DATA:
+      return { ...state, getNewsData: payload }
+    // ------------------
+    case HIT_DATA:
+      return { ...state, getHitData: payload }
+    // ------------------
+    case SET_ABOUT:
+      return { ...state, getAbout: payload }
     // ------------------
     case SPIN_LOAD:
       return { ...state, getLoad: payload }
