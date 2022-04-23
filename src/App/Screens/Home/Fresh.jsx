@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Carousel from 'react-bootstrap/Carousel'
 import { Link } from 'react-router-dom'
 
 import { setDetailData, setFavourite, unSetFavourite } from '../../Store/action'
+import { db } from '../../config/fbConfig'
+import LoadingSpinner from '../../Components/Spinner'
 import './_hits.scss'
 
-const News = () => {
-  const [newsLimit, setNewsLimit] = useState(8)
+const Fresh = () => {
+  const [freshLimit, setFreshLimit] = useState(4)
   const dispatch = useDispatch()
-  const { getFavourite, getNewsData } = useSelector((store) => store.appReducer)
+  const { getFavourite, getFreshData, getLoad } = useSelector(
+    (store) => store.appReducer
+  )
 
   const checkFavourite = (item, key) => {
     const index = getFavourite?.map((i, k) => i.id)
@@ -18,26 +23,57 @@ const News = () => {
       else dispatch(setFavourite(item))
     } else dispatch(setFavourite(item))
   }
+  const [isOver, setIsOver] = useState(false)
+  const [itemId, setItemId] = useState(-1)
 
   return (
     <div className="hit-container">
-      {getNewsData.length !== 0 && (
+      {getFreshData.length !== 0 && (
         <>
           <h5>Новинки</h5>
 
           <div className="hit-block">
-            {getNewsData
-              .filter((i, k) => i.id + 1 <= newsLimit)
+            {getFreshData
+              .filter((i, k) => k + 1 <= freshLimit)
               .map((item, key) => (
                 <div className="hit-block__item" key={item.id}>
-                  <div className="hit-block__imgdiv">
-                    <Link to="detailpage">
-                      <img
-                        onClick={() => dispatch(setDetailData(item))}
-                        src={item.imgUrl}
-                        alt="product"
-                      />
-                    </Link>
+                  <div className="hit-block__imgblock">
+                    <Carousel
+                      fade
+                      keyboard={false}
+                      controls={false}
+                      interval={key === itemId ? 1000 : null}
+                      pause={false}
+                      indicators={key === itemId}
+                    >
+                      {item.imgNcolors.map((img, index) => (
+                        <Carousel.Item
+                          onMouseOver={() => {
+                            setIsOver(true)
+                            setItemId(key)
+                          }}
+                          onMouseLeave={() => {
+                            setIsOver(false)
+                            setItemId(-1)
+                          }}
+                          className="hit-block__swiper"
+                          key={img.id}
+                        >
+                          <img src={img.imgUrl} alt="img" />
+                        </Carousel.Item>
+                      ))}
+                    </Carousel>
+
+                    <img
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => checkFavourite(item, key)}
+                      src={
+                        getFavourite?.map((i, k) => i.id).includes(item.id)
+                          ? require('../../assets/filled-heart.png')
+                          : require('../../assets/unfill-heart.png')
+                      }
+                      alt="heart-icon"
+                    />
                     {item.discount && (
                       <>
                         <img
@@ -53,17 +89,8 @@ const News = () => {
                         </span>
                       </>
                     )}
-                    <img
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => checkFavourite(item, key)}
-                      src={
-                        getFavourite?.map((i, k) => i.id).includes(item.id)
-                          ? require('../../assets/filled-heart.png')
-                          : require('../../assets/unfill-heart.png')
-                      }
-                      alt="heart-icon"
-                    />
                   </div>
+                  {/* ---- end img block ----- */}
                   <Link to="detailpage">
                     <div
                       onClick={() => dispatch(setDetailData(item))}
@@ -80,11 +107,11 @@ const News = () => {
                       </div>
                       <span>Размер: {item.size}</span>
                       <div className="hit-block__colorsblock">
-                        {item.colors.map((color, k) => (
+                        {item.imgNcolors.map((color, k) => (
                           <div
-                            key={k}
+                            key={color.id}
                             className="hit-block__color"
-                            style={{ backgroundColor: color }}
+                            style={{ backgroundColor: color.color }}
                           />
                         ))}
                       </div>
@@ -95,7 +122,11 @@ const News = () => {
           </div>
 
           <button
-            onClick={() => setNewsLimit(newsLimit + 4)}
+            onClick={
+              // sendData
+              // () => console.log(getFreshData)
+              () => setFreshLimit(freshLimit + 4)
+            }
             className="hit-block__morebtn"
           >
             Еще
@@ -106,4 +137,4 @@ const News = () => {
   )
 }
 
-export default News
+export default Fresh

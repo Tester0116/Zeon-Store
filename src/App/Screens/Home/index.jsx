@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 import ScrollToTop from '../../Components/ScrollToTop'
 import Collections from './Collections'
-import News from './News'
+import Fresh from './Fresh'
 import Hits from './Hits'
 
 import 'swiper/css'
@@ -14,8 +14,14 @@ import 'swiper/css/navigation'
 import './_hits.scss'
 
 const HomeIndex = () => {
-  const { getHomeBanner } = useSelector((state) => state.appReducer)
+  const { getHomeBanner, getBenefitData } = useSelector(
+    (state) => state.appReducer
+  )
   const [activeIndex, setactiveIndex] = useState(0)
+
+  const images = {
+    // benefit: { benefit },
+  }
 
   return (
     <div className="container">
@@ -58,10 +64,29 @@ const HomeIndex = () => {
       {/* ------------ */}
       <Hits />
       {/* ------------ */}
-      <News />
+      <Fresh />
       {/* ------------ */}
       <Collections />
-      {/* ------------ */}
+      {/* ------ BENEFITS ------ */}
+      {getBenefitData.length !== 0 && (
+        <>
+          <h5 className="benefit-block__h5">Наши преимущества</h5>
+          <div className="benefit-block">
+            {getBenefitData
+              .sort((a, b) => a.id - b.id)
+              .map((benefit, index) => (
+                <div key={benefit.id} className="benefit-block__item">
+                  <img
+                    src={require(`../../assets/${benefit.type}-icon.png`)}
+                    alt="cash icon"
+                  />
+                  <span>{benefit.title}</span>
+                  <p>{benefit.text}</p>
+                </div>
+              ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }

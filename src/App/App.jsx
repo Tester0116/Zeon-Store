@@ -11,6 +11,8 @@ import {
   setHomeBanner,
   setLoad,
   setNewsData,
+  setFreshData,
+  setBenefitData,
 } from './Store/action'
 import { db } from './config/fbConfig'
 
@@ -21,22 +23,23 @@ const App = () => {
 
   useEffect(() => {
     // ----- Getting Collections Data -----
-    db.collection('Collections').onSnapshot(
-      (snapshot) => {
-        dispatch(setCollectionsData(snapshot.docs.map((doc) => doc.data())))
-        const HitData = snapshot.docs.map((doc) =>
-          doc.data().allData.filter((i) => i.hit === true)
-        )
-        dispatch(setHitData(HitData[0]))
-
-        // dispatch(setHitData(snapshot.docs.map((doc) => doc.data().allData)))
-      }
-      // console.log(snapshot.docs.map((doc) => doc.data().allData))
+    db.collection('Collections').onSnapshot((snapshot) => {
+      dispatch(setCollectionsData(snapshot.docs.map((doc) => doc.data())))
+      // ---------- setting Hit Data ----------
+      const HitData = snapshot.docs.map((doc) =>
+        doc.data().allData.filter((i) => i.hit === true)
+      )
+      dispatch(setHitData(HitData[0]))
+      // ---------- setting Frsh Data ----------
+      const FreshData = snapshot.docs.map((doc) =>
+        doc.data().allData.filter((i) => i.new === true)
+      )
+      dispatch(setFreshData(FreshData[0]))
+    })
+    // ----- Getting Benefit Data -----
+    db.collection('Benefits').onSnapshot((snapshot) =>
+      dispatch(setBenefitData(snapshot.docs.map((doc) => doc.data())))
     )
-    // ----- Getting Hits Data -----
-    // db.collection('Hits').onSnapshot((snapshot) =>
-    //   dispatch(setHitData(snapshot.docs.map((doc) => doc.data())))
-    // )
     // ----- Getting Home Banner -----
     db.collection('HomeBanner').onSnapshot((snapshot) =>
       dispatch(setHomeBanner(snapshot.docs.map((doc) => doc.data())))
@@ -45,7 +48,6 @@ const App = () => {
     db.collection('News').onSnapshot((snapshot) =>
       dispatch(setNewsData(snapshot.docs.map((doc) => doc.data())))
     )
-
     setTimeout(() => dispatch(setLoad(false)), 3500)
   }, [])
 
