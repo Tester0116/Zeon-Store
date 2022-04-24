@@ -1,4 +1,5 @@
 export const COLLECTIONS_DATA = 'COLLECTIONS_DATA'
+export const CATEGORIES_DATA = 'CATEGORIES_DATA'
 export const DETAILPAGE_DATA = 'DETAILPAGE_DATA'
 export const UNSET_FAVOURITE = 'UNSET_FAVOURITE'
 export const SET_FAVOURITE = 'SET_FAVOURITE'
@@ -10,6 +11,12 @@ export const NEWS_DATA = 'NEWS_DATA'
 export const SPIN_LOAD = 'SPIN_LOAD'
 export const HIT_DATA = 'HIT_DATA'
 
+// ----------------------------
+export const setCategoriesData = (payload) => ({
+  type: CATEGORIES_DATA,
+  payload,
+})
+// ----------------------------
 export const setCollectionsData = (payload) => ({
   type: COLLECTIONS_DATA,
   payload,

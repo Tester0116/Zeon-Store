@@ -1,0 +1,20 @@
+.collections-container {
+  & > :last-child {
+    margin-top: 50px;
+    // margin-right: -5px;
+    float: right;
+    // background-color: red;
+  }
+  & > h5 {
+    font: 500 24px 'Montserrat';
+    line-height: 29px;
+    text-align: left;
+    margin-top: 92px;
+    margin-bottom: 10px;
+  }
+  &__paginationblock {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+}

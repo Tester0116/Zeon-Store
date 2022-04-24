@@ -24,12 +24,19 @@ const App = () => {
   useEffect(() => {
     // ----- Getting Collections Data -----
     db.collection('Collections').onSnapshot((snapshot) => {
-      dispatch(setCollectionsData(snapshot.docs.map((doc) => doc.data())))
+      const coll = snapshot.docs.map((doc) => doc.data())
+      let time = 0
+      while (time <= 57) {
+        coll.splice(0, 0, coll[0])
+        time++
+      }
+      dispatch(setCollectionsData(coll))
       // ---------- setting Hit Data ----------
       const HitData = snapshot.docs.map((doc) =>
         doc.data().allData.filter((i) => i.hit === true)
       )
       dispatch(setHitData(HitData[0]))
+
       // ---------- setting Frsh Data ----------
       const FreshData = snapshot.docs.map((doc) =>
         doc.data().allData.filter((i) => i.new === true)

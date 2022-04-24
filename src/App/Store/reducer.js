@@ -1,5 +1,6 @@
 import {
   COLLECTIONS_DATA,
+  CATEGORIES_DATA,
   UNSET_FAVOURITE,
   DETAILPAGE_DATA,
   SET_FAVOURITE,
@@ -14,6 +15,7 @@ import {
 
 const initialState = {
   getCollectionsData: [],
+  getCategoriesData: [],
   getBenefitData: [],
   getHomeBanner: [],
   getDetailData: [],
@@ -41,6 +43,9 @@ export default function appReducer(state = initialState, action) {
     // ------------------
     case COLLECTIONS_DATA:
       return { ...state, getCollectionsData: payload }
+    // ------------------
+    case CATEGORIES_DATA:
+      return { ...state, getCategoriesData: payload }
     // ------------------
     case BENEFIT_DATA:
       return { ...state, getBenefitData: payload }

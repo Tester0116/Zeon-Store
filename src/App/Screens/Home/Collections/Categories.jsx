@@ -1,20 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Carousel from 'react-bootstrap/Carousel'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-import { setDetailData, setFavourite, unSetFavourite } from '../../Store/action'
-import { db } from '../../config/fbConfig'
-import LoadingSpinner from '../../Components/Spinner'
-import './_hits.scss'
+import CustomPagination from '../../../Components/Pagination'
+import ScrollToTop from '../../../Components/ScrollToTop'
+import LoadingSpinner from '../../../Components/Spinner'
+import Header from '../../../Components/Header'
+import Footer from '../../../Components/Footer'
+import {
+  setDetailData,
+  setFavourite,
+  unSetFavourite,
+} from '../../../Store/action'
 
-const Fresh = () => {
-  const [freshLimit, setFreshLimit] = useState(4)
-  const dispatch = useDispatch()
-  const { getFavourite, getFreshData, getLoad } = useSelector(
+import './pagination.scss'
+import '../_collection.scss'
+import '../_hits.scss'
+import './_index.scss'
+
+const Categories = () => {
+  //   --------------------------------------
+  const { getCategoriesData, getFavourite } = useSelector(
     (store) => store.appReducer
   )
-
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  // ------ pagination ------
+  console.log('====================================')
+  console.log(getCategoriesData)
+  console.log('====================================')
+  const [currentPage, setCurrentPage] = useState(1)
+  let PageSize = 12
+  const currentCategoriesData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize
+    const lastPageIndex = firstPageIndex + PageSize
+    return getCategoriesData?.allData.slice(firstPageIndex, lastPageIndex)
+  }, [currentPage, getCategoriesData])
+  //   --------------------------------------
   const checkFavourite = (item, key) => {
     const index = getFavourite?.map((i, k) => i.id)
 
@@ -23,20 +46,24 @@ const Fresh = () => {
       else dispatch(setFavourite(item))
     } else dispatch(setFavourite(item))
   }
-  const [isOver, setIsOver] = useState(false)
   const [itemId, setItemId] = useState(-1)
-
+  //   --------------------------------------
   return (
-    <div className="hit-container">
-      {getFreshData.length !== 0 && (
-        <>
-          <h5>Новинки</h5>
+    <section>
+      <Header
+        breadCrums={[
+          { id: 0, text: 'Коллекции' },
+          { id: 1, text: getCategoriesData?.itemType },
+        ]}
+      />
 
-          <div className="hit-block">
-            {getFreshData
-              .filter((i, k) => k + 1 <= freshLimit)
-              .map((item, key) => (
-                <div className="hit-block__item" key={item.id}>
+      <div className="container">
+        {getCategoriesData.allData.length !== 0 ? (
+          <div className="collections-container">
+            <h5>{getCategoriesData.itemType}</h5>
+            <div className="collections-container__paginationblock">
+              {currentCategoriesData.map((item, key) => (
+                <div className="hit-block__item">
                   <div className="hit-block__imgblock">
                     <Carousel
                       fade
@@ -48,24 +75,13 @@ const Fresh = () => {
                     >
                       {item.imgNcolors.map((img, index) => (
                         <Carousel.Item
-                          onMouseOver={() => {
-                            setIsOver(true)
-                            setItemId(key)
-                          }}
-                          onMouseLeave={() => {
-                            setIsOver(false)
-                            setItemId(-1)
-                          }}
                           className="hit-block__swiper"
+                          onMouseOver={() => setItemId(key)}
+                          onMouseLeave={() => setItemId(-1)}
+                          onClick={() => dispatch(setDetailData(item))}
                           key={img.id}
                         >
-                          <Link to="detailpage">
-                            <img
-                              onClick={() => dispatch(setDetailData(item))}
-                              src={img.imgUrl}
-                              alt="img"
-                            />
-                          </Link>
+                          <img src={img.imgUrl} alt="img" />
                         </Carousel.Item>
                       ))}
                     </Carousel>
@@ -75,8 +91,8 @@ const Fresh = () => {
                       onClick={() => checkFavourite(item, key)}
                       src={
                         getFavourite?.map((i, k) => i.id).includes(item.id)
-                          ? require('../../assets/filled-heart.png')
-                          : require('../../assets/unfill-heart.png')
+                          ? require('../../../assets/filled-heart.png')
+                          : require('../../../assets/unfill-heart.png')
                       }
                       alt="heart-icon"
                     />
@@ -84,7 +100,7 @@ const Fresh = () => {
                       <>
                         <img
                           className="hit-block__discount-img"
-                          src={require('../../assets/discount-icon.png')}
+                          src={require('../../../assets/discount-icon.png')}
                           alt="block__discount"
                         />
                         <span className="hit-block__discount-procent">
@@ -115,7 +131,7 @@ const Fresh = () => {
                       <div className="hit-block__colorsblock">
                         {item.imgNcolors.map((color, k) => (
                           <div
-                            key={color.id}
+                            key={k}
                             className="hit-block__color"
                             style={{ backgroundColor: color.color }}
                           />
@@ -125,22 +141,28 @@ const Fresh = () => {
                   </Link>
                 </div>
               ))}
+            </div>
+            <CustomPagination
+              className="pagination-bar"
+              currentPage={currentPage}
+              totalCount={getCategoriesData.allData.length}
+              pageSize={PageSize}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
           </div>
-
-          <button
-            onClick={
-              // sendData
-              // () => console.log(getFreshData)
-              () => setFreshLimit(freshLimit + 4)
-            }
-            className="hit-block__morebtn"
-          >
-            Еще
-          </button>
-        </>
-      )}
-    </div>
+        ) : (
+          <LoadingSpinner />
+        )}
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <ScrollToTop />
+      <Footer />
+    </section>
   )
 }
 
-export default Fresh
+export default Categories

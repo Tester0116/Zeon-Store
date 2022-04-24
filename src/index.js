@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Collections from './App/Screens/Home/Collections'
+import CollectionScreen from './App/Screens/Home/Collections/CollectionScreen'
+import Categories from './App/Screens/Home/Collections/Categories'
 import DetailPage from './App/Screens/Home/DetailPage'
 import Support from './App/Screens/Support'
 import About from './App/Screens/About'
@@ -22,8 +23,10 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
+          <Route index element={<App />} />
           <Route path="about" element={<About />} />
-          <Route path="collections" element={<Collections />} />
+          <Route path="collections" element={<CollectionScreen />} />
+          <Route path="collections/categories" element={<Categories />} />
           <Route path="detailpage" element={<DetailPage />} />
           <Route path="news" element={<News />} />
           <Route path="support" element={<Support />} />

@@ -14,13 +14,13 @@ const Collections = () => {
       {/* {console.log(getCollectionsData)} */}
       {getCollectionsData.length !== 0 && (
         <>
-          <h5>Collections</h5>
+          <h5>Коллекция</h5>
 
           <div className="collections-block">
             {getCollectionsData
-              .filter((i, k) => i.id + 1 <= collectionLimit)
+              .filter((i, k) => k + 1 <= collectionLimit)
               .map((item, key) => (
-                <div className="collections-block__item" key={item.id}>
+                <div className="collections-block__item" key={key}>
                   <img
                     src={item.allData[0]?.imgNcolors[2]?.imgUrl}
                     alt="collection item"

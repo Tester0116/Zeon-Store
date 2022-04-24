@@ -13,13 +13,13 @@ const Header = ({ breadCrums }) => {
         {/* -------------------------- */}
         <div className="header-first__block">
           <div>
-            <Link to="about">
+            <Link to="/about">
               <a>О нас</a>
             </Link>
-            <Link to="collections">
+            <Link to="/collections">
               <a className="mh24">Коллекции</a>
             </Link>
-            <Link to="news">
+            <Link to="/news">
               <a>Новости</a>
             </Link>
           </div>
@@ -67,7 +67,7 @@ const Header = ({ breadCrums }) => {
               <a>Избранное</a>
             </div>
             <div className="header-second__block-favourite">
-              <img alt="cart" src={require('../../assets/cart.png')} />
+              <img alt="/cart" src={require('../../assets/cart.png')} />
               <a>Корзина</a>
             </div>
           </div>

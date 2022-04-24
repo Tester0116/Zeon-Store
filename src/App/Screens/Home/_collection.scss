@@ -1,20 +1,16 @@
-.collections-container h5 {
-  font: 500 24px 'Montserrat';
-  line-height: 29px;
-  text-align: center;
-}
 .collections-block {
   margin-top: 18px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   gap: 8px;
+
   &__item {
     filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 0.02));
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 374px;
+    min-height: 374px;
     position: relative;
     & > span {
       position: absolute;
@@ -25,18 +21,24 @@
       line-height: 18px;
       color: white;
     }
+
+    //getting img
     & > :first-child {
       filter: contrast(0.6) blur(0.1px);
       object-fit: cover;
       width: 100%;
       min-height: 330px;
     }
+
     & > button {
       height: 44px;
       background-color: #1d1d1b;
       border: none;
       transition-duration: 0.6s;
-      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
       & > span {
         font: 500 14px 'Montserrat';
         line-height: 17px;
@@ -44,9 +46,6 @@
       }
       & > :last-child {
         //arrow right
-        position: absolute;
-        top: 13.25px;
-        right: 77.5px;
         background: url('../../assets/arrow-right-white.svg');
         width: 20px;
         height: 20px;
