@@ -27,6 +27,10 @@ root.render(
           <Route path="about" element={<About />} />
           <Route path="collections" element={<CollectionScreen />} />
           <Route path="collections/categories" element={<Categories />} />
+          <Route
+            path="collections/categories/detailpage"
+            element={<DetailPage />}
+          />
           <Route path="detailpage" element={<DetailPage />} />
           <Route path="news" element={<News />} />
           <Route path="support" element={<Support />} />

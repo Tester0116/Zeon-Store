@@ -23,7 +23,6 @@ const Fresh = () => {
       else dispatch(setFavourite(item))
     } else dispatch(setFavourite(item))
   }
-  const [isOver, setIsOver] = useState(false)
   const [itemId, setItemId] = useState(-1)
 
   return (
@@ -48,14 +47,8 @@ const Fresh = () => {
                     >
                       {item.imgNcolors.map((img, index) => (
                         <Carousel.Item
-                          onMouseOver={() => {
-                            setIsOver(true)
-                            setItemId(key)
-                          }}
-                          onMouseLeave={() => {
-                            setIsOver(false)
-                            setItemId(-1)
-                          }}
+                          onMouseOver={() => setItemId(key)}
+                          onMouseLeave={() => setItemId(-1)}
                           className="hit-block__swiper"
                           key={img.id}
                         >

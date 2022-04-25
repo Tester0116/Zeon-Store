@@ -49,6 +49,7 @@ const Collections = () => {
           >
             Еще
           </button>
+          <span />
         </>
       )}
     </section>

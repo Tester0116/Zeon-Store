@@ -21,15 +21,13 @@ import './_index.scss'
 
 const Categories = () => {
   //   --------------------------------------
-  const { getCategoriesData, getFavourite } = useSelector(
+  const { getCategoriesData, getFavourite, getFreshData } = useSelector(
     (store) => store.appReducer
   )
   const dispatch = useDispatch()
   const navigate = useNavigate()
   // ------ pagination ------
-  console.log('====================================')
-  console.log(getCategoriesData)
-  console.log('====================================')
+
   const [currentPage, setCurrentPage] = useState(1)
   let PageSize = 12
   const currentCategoriesData = useMemo(() => {
@@ -59,97 +57,210 @@ const Categories = () => {
 
       <div className="container">
         {getCategoriesData.allData.length !== 0 ? (
-          <div className="collections-container">
-            <h5>{getCategoriesData.itemType}</h5>
-            <div className="collections-container__paginationblock">
-              {currentCategoriesData.map((item, key) => (
-                <div className="hit-block__item">
-                  <div className="hit-block__imgblock">
-                    <Carousel
-                      fade
-                      keyboard={false}
-                      controls={false}
-                      interval={key === itemId ? 1000 : null}
-                      pause={false}
-                      indicators={key === itemId}
-                    >
-                      {item.imgNcolors.map((img, index) => (
-                        <Carousel.Item
-                          className="hit-block__swiper"
-                          onMouseOver={() => setItemId(key)}
-                          onMouseLeave={() => setItemId(-1)}
-                          onClick={() => dispatch(setDetailData(item))}
-                          key={img.id}
-                        >
-                          <img src={img.imgUrl} alt="img" />
-                        </Carousel.Item>
-                      ))}
-                    </Carousel>
-
-                    <img
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => checkFavourite(item, key)}
-                      src={
-                        getFavourite?.map((i, k) => i.id).includes(item.id)
-                          ? require('../../../assets/filled-heart.png')
-                          : require('../../../assets/unfill-heart.png')
-                      }
-                      alt="heart-icon"
-                    />
-                    {item.discount && (
-                      <>
-                        <img
-                          className="hit-block__discount-img"
-                          src={require('../../../assets/discount-icon.png')}
-                          alt="block__discount"
-                        />
-                        <span className="hit-block__discount-procent">
-                          {Math.round(
-                            ((item.price - item.discount) / item.discount) * 100
-                          )}
-                          %
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  {/* ---- end img block ----- */}
-                  <Link to="detailpage">
-                    <div
-                      onClick={() => dispatch(setDetailData(item))}
-                      className="hit-block__textdiv"
-                    >
-                      <span>{item.title}</span>
-                      <div>
-                        <span>{item.price} p</span>
-                        {item.discount && (
-                          <span className="hit-block__discount">
-                            {item.discount} p
-                          </span>
-                        )}
-                      </div>
-                      <span>Размер: {item.size}</span>
-                      <div className="hit-block__colorsblock">
-                        {item.imgNcolors.map((color, k) => (
-                          <div
-                            key={k}
-                            className="hit-block__color"
-                            style={{ backgroundColor: color.color }}
-                          />
+          <>
+            <div className="collections-container">
+              <h5>{getCategoriesData.itemType}</h5>
+              {/* ----------------------------------------------- */}
+              <div className="collections-container__paginationblock">
+                {currentCategoriesData.map((item, key) => (
+                  <div className="hit-block__item">
+                    <div className="hit-block__imgblock">
+                      <Carousel
+                        fade
+                        keyboard={false}
+                        controls={false}
+                        interval={key === itemId ? 1000 : null}
+                        pause={false}
+                        indicators={key === itemId}
+                      >
+                        {item.imgNcolors.map((img, index) => (
+                          <Carousel.Item
+                            className="hit-block__swiper"
+                            onMouseOver={() => setItemId(key)}
+                            onMouseLeave={() => setItemId(-1)}
+                            onClick={() => dispatch(setDetailData(item))}
+                            key={img.id}
+                          >
+                            <Link to="detailpage">
+                              <img
+                                onClick={() => dispatch(setDetailData(item))}
+                                src={img.imgUrl}
+                                alt="img"
+                              />
+                            </Link>
+                          </Carousel.Item>
                         ))}
-                      </div>
+                      </Carousel>
+
+                      <img
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => checkFavourite(item, key)}
+                        src={
+                          getFavourite?.map((i, k) => i.id).includes(item.id)
+                            ? require('../../../assets/filled-heart.png')
+                            : require('../../../assets/unfill-heart.png')
+                        }
+                        alt="heart-icon"
+                      />
+                      {item.discount && (
+                        <>
+                          <img
+                            className="hit-block__discount-img"
+                            src={require('../../../assets/discount-icon.png')}
+                            alt="block__discount"
+                          />
+                          <span className="hit-block__discount-procent">
+                            {Math.round(
+                              ((item.price - item.discount) / item.discount) *
+                                100
+                            )}
+                            %
+                          </span>
+                        </>
+                      )}
                     </div>
-                  </Link>
-                </div>
-              ))}
+                    {/* ---- end img block ----- */}
+                    <Link to="detailpage">
+                      <div
+                        onClick={() => dispatch(setDetailData(item))}
+                        className="hit-block__textdiv"
+                      >
+                        <span>{item.title}</span>
+                        <div>
+                          <span>{item.price} p</span>
+                          {item.discount && (
+                            <span className="hit-block__discount">
+                              {item.discount} p
+                            </span>
+                          )}
+                        </div>
+                        <span>Размер: {item.size}</span>
+                        <div className="hit-block__colorsblock">
+                          {item.imgNcolors.map((color, k) => (
+                            <div
+                              key={k}
+                              className="hit-block__color"
+                              style={{ backgroundColor: color.color }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+
+              {/* ---------------- */}
+
+              <CustomPagination
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={getCategoriesData.allData.length}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
             </div>
-            <CustomPagination
-              className="pagination-bar"
-              currentPage={currentPage}
-              totalCount={getCategoriesData.allData.length}
-              pageSize={PageSize}
-              onPageChange={(page) => setCurrentPage(page)}
-            />
-          </div>
+            {/* ----------------------------------------------- */}
+            {getFreshData.length !== 0 && (
+              <div className="fresh-block">
+                <h5>Новинки</h5>
+                <div className="hit-block hit-block__categories">
+                  {getFreshData
+                    .filter((i, k) => k + 1 <= 5)
+                    .map((item, key) => (
+                      <div className="hit-block__item" key={item.id}>
+                        <div className="hit-block__imgblock">
+                          <Carousel
+                            fade
+                            keyboard={false}
+                            controls={false}
+                            interval={key === itemId ? 1000 : null}
+                            pause={false}
+                            indicators={key === itemId}
+                          >
+                            {item.imgNcolors.map((img, index) => (
+                              <Carousel.Item
+                                onMouseOver={() => setItemId(key)}
+                                onMouseLeave={() => setItemId(-1)}
+                                className="hit-block__swiper"
+                                key={img.id}
+                              >
+                                <Link to="detailpage">
+                                  <img
+                                    onClick={() =>
+                                      dispatch(setDetailData(item))
+                                    }
+                                    src={img.imgUrl}
+                                    alt="img"
+                                  />
+                                </Link>
+                              </Carousel.Item>
+                            ))}
+                          </Carousel>
+
+                          <img
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => checkFavourite(item, key)}
+                            src={
+                              getFavourite
+                                ?.map((i, k) => i.id)
+                                .includes(item.id)
+                                ? require('../../../assets/filled-heart.png')
+                                : require('../../../assets/unfill-heart.png')
+                            }
+                            alt="heart-icon"
+                          />
+                          {item.discount && (
+                            <>
+                              <img
+                                className="hit-block__discount-img"
+                                src={require('../../../assets/discount-icon.png')}
+                                alt="block__discount"
+                              />
+                              <span className="hit-block__discount-procent">
+                                {Math.round(
+                                  ((item.price - item.discount) /
+                                    item.discount) *
+                                    100
+                                )}
+                                %
+                              </span>
+                            </>
+                          )}
+                        </div>
+                        {/* ---- end img block ----- */}
+                        <Link to="detailpage">
+                          <div
+                            onClick={() => dispatch(setDetailData(item))}
+                            className="hit-block__textdiv"
+                          >
+                            <span>{item.title}</span>
+                            <div>
+                              <span>{item.price} p</span>
+                              {item.discount && (
+                                <span className="hit-block__discount">
+                                  {item.discount} p
+                                </span>
+                              )}
+                            </div>
+                            <span>Размер: {item.size}</span>
+                            <div className="hit-block__colorsblock">
+                              {item.imgNcolors.map((color, k) => (
+                                <div
+                                  key={color.id}
+                                  className="hit-block__color"
+                                  style={{ backgroundColor: color.color }}
+                                />
+                              ))}
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            )}
+          </>
         ) : (
           <LoadingSpinner />
         )}
