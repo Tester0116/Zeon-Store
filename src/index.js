@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CollectionScreen from './App/Screens/Home/Collections/CollectionScreen'
 import Categories from './App/Screens/Home/Collections/Categories'
 import DetailPage from './App/Screens/Home/DetailPage'
+import Cart from './App/Components/Header/Cart'
 import Support from './App/Screens/Support'
 import About from './App/Screens/About'
 import News from './App/Screens/News'
@@ -32,6 +33,7 @@ root.render(
             element={<DetailPage />}
           />
           <Route path="detailpage" element={<DetailPage />} />
+          <Route path="cart" element={<Cart />} />
           <Route path="news" element={<News />} />
           <Route path="support" element={<Support />} />
           <Route path="*" element={<App />} />

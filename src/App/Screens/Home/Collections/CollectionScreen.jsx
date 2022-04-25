@@ -16,9 +16,7 @@ import './_index.scss'
 
 const CollectionScreen = () => {
   const navigate = useNavigate()
-  const { getCollectionsData, getCategoriesData } = useSelector(
-    (store) => store.appReducer
-  )
+  const { getCollectionsData } = useSelector((store) => store.appReducer)
   const dispatch = useDispatch()
   // ------ pagination ------
   const [currentPage, setCurrentPage] = useState(1)

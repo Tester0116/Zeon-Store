@@ -27,7 +27,7 @@ const App = () => {
       const coll = snapshot.docs.map((doc) => doc.data())
       let time = 0
       while (time <= 57) {
-        coll.splice(0, 0, coll[0])
+        coll.splice(coll.length - 1, 0, coll[0])
         time++
       }
       dispatch(setCollectionsData(coll))

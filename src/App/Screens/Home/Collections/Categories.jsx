@@ -50,8 +50,8 @@ const Categories = () => {
     <section>
       <Header
         breadCrums={[
-          { id: 0, text: 'Коллекции' },
-          { id: 1, text: getCategoriesData?.itemType },
+          { id: 1, text: 'Коллекции' },
+          { id: 0, text: getCategoriesData?.itemType },
         ]}
       />
 

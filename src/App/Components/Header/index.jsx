@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import './_index.scss'
 
 const Header = ({ breadCrums }) => {
-  const { getFavourite } = useSelector((store) => store.appReducer)
+  const { getFavourite, getCartData } = useSelector((store) => store.appReducer)
   const navigate = useNavigate()
   return (
     <header className="parent-block">
@@ -56,7 +56,7 @@ const Header = ({ breadCrums }) => {
             </a>
           </div>
           <div className="fdrow posr">
-            <div className="header-second__block-favourite header-second__block-favouritefirst">
+            <div className="header-second__block-favourite header-second__block-dot">
               <div className="posr">
                 {Boolean(getFavourite.length !== 0) && <span />}
                 <img
@@ -66,10 +66,15 @@ const Header = ({ breadCrums }) => {
               </div>
               <a>Избранное</a>
             </div>
-            <div className="header-second__block-favourite">
-              <img alt="/cart" src={require('../../assets/cart.png')} />
-              <a>Корзина</a>
-            </div>
+            <Link to="/cart">
+              <div className="header-second__block-favourite header-second__block-dot">
+                <div className="posr">
+                  {Boolean(getCartData.length !== 0) && <span />}
+                  <img alt="cart" src={require('../../assets/cart.png')} />
+                </div>
+                <a>Корзина</a>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -81,10 +86,15 @@ const Header = ({ breadCrums }) => {
           <div className="header-line" />
           {/* -------------------------- */}
           <div className="breadcrumb-block">
-            <span onClick={() => navigate(-1)}>Главная</span>
+            <span onClick={() => navigate('/')}>Главная</span>
 
             {breadCrums.map((crum, key) => (
-              <span key={crum.id}>{crum.text}</span>
+              <span
+                onClick={() => crum.id !== 0 && navigate(-crum.id)}
+                key={crum.id}
+              >
+                {crum.text}
+              </span>
             ))}
           </div>
         </>

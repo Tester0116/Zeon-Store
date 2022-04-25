@@ -7,6 +7,7 @@ import {
   BENEFIT_DATA,
   HOME_BANNER,
   FRESH_DATA,
+  CART_DATA,
   SET_ABOUT,
   SPIN_LOAD,
   NEWS_DATA,
@@ -21,6 +22,7 @@ const initialState = {
   getDetailData: [],
   getFavourite: [],
   getFreshData: [],
+  getCartData: [],
   getNewsData: [],
   getHitData: [],
   getLoad: true,
@@ -40,6 +42,9 @@ export default function appReducer(state = initialState, action) {
     // ------------------
     case SET_FAVOURITE:
       return { ...state, getFavourite: [...state.getFavourite, payload] }
+    // ------------------
+    case CART_DATA:
+      return { ...state, getCartData: [...state.getCartData, payload] }
     // ------------------
     case COLLECTIONS_DATA:
       return { ...state, getCollectionsData: payload }

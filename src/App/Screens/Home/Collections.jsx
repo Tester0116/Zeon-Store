@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { setCategoriesData } from '../../Store/action'
 
 import './_collection.scss'
 
 const Collections = () => {
+  const navigate = useNavigate()
+
   const { getCollectionsData } = useSelector((state) => state.appReducer)
+  const dispatch = useDispatch()
+
   const [collectionLimit, setCollectionLimit] = useState(4)
 
   const sendData = () => {}
 
   return (
     <section className="collections-container">
-      {/* {console.log(getCollectionsData)} */}
       {getCollectionsData.length !== 0 && (
         <>
           <h5>Коллекция</h5>
@@ -27,11 +33,10 @@ const Collections = () => {
                   />
                   <span>{item.itemType}</span>
                   <button
-                    onClick={
-                      sendData
-                      // () => console.log(randomize)
-                      // () => sethitLimit(hitLimit + 4)
-                    }
+                    onClick={() => {
+                      dispatch(setCategoriesData(item))
+                      navigate('collections/categories')
+                    }}
                   >
                     <span>Смотреть все</span>
                     <div></div>

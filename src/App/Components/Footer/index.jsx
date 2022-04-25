@@ -24,21 +24,21 @@ const Footer = () => {
               <span className="footer-block__colums-linkstitle">Компания</span>
               <ul>
                 <li>
-                  <Link to="about">
+                  <Link to="/about">
                     <a>
                       <span>О нас</span>
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link to="news">
+                  <Link to="/news">
                     <a>
                       <span>Новости</span>
                     </a>
                   </Link>
                 </li>
                 <li>
-                  <Link to="support">
+                  <Link to="/support">
                     <a>
                       <span>Помощь</span>
                     </a>

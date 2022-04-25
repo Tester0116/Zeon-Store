@@ -127,10 +127,7 @@ const ScrollToTop = () => {
         </form>
       )}
       <div
-        className={classNames(
-          SmsModalVisible ? 'opacity-1' : 'opacity-0',
-          'top-second-block'
-        )}
+        className={SmsModalVisible ? 'opacity-1 top-second-block' : 'opacity-0'}
       >
         <div className="fdrow">
           <a
@@ -161,14 +158,6 @@ const ScrollToTop = () => {
               src={require('../../assets/phoneTop-icon.png')}
             />
           </a>
-        </div>
-        <div className="fdcol">
-          <img
-            alt="arrow up icon"
-            className="top-second-block__top-icon"
-            onClick={scrollToTop}
-            src={require('../../assets/scrollTop-icon.png')}
-          />
           <img
             alt="arrow up icon"
             className="top-second-block__close-icon"
@@ -177,12 +166,7 @@ const ScrollToTop = () => {
           />
         </div>
       </div>
-      <div
-        className={classNames(
-          isVisible ? 'opacity-1' : 'opacity-0',
-          'top-first-block'
-        )}
-      >
+      <div className={isVisible ? 'opacity-1 top-first-block' : 'opacity-0'}>
         <img
           alt="arrow up icon"
           style={{ cursor: 'pointer' }}
@@ -192,7 +176,7 @@ const ScrollToTop = () => {
         <img
           alt="sms icon"
           style={{ cursor: 'pointer' }}
-          onClick={() => setSmsModalVisible(true)}
+          onClick={() => setSmsModalVisible(!SmsModalVisible)}
           src={require('../../assets/sms-icon.png')}
         />
       </div>

@@ -21,7 +21,9 @@ a {
   color: #393939;
   cursor: pointer;
 }
-
+a:hover {
+  color: none;
+}
 li {
   list-style-type: none;
 }
