@@ -1,23 +1,18 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { incrementCartCounter } from '../../Store/action'
+import { decrementCartCounter, incrementCartCounter } from '../../Store/action'
 
 import './_index.scss'
 
-const Counter = ({ index }) => {
-  const [count, setCount] = useState(1)
+const Counter = ({ index, count }) => {
+  // const [counter, setCount] = useState(1)
   const dispatch = useDispatch()
-  const { getCartData, getDetailData } = useSelector(
-    (state) => state.appReducer
-  )
+  const { getCartData } = useSelector((state) => state.appReducer)
 
-  const decrement = () => {
-    // dispatch(setCartCounter(index))
-  }
-  const increment = () => {
-    setCount(count + 1)
-    dispatch(incrementCartCounter(index))
-  }
+  const decrement = () => count !== 0 && dispatch(decrementCartCounter(index))
+
+  const increment = () => dispatch(incrementCartCounter(index))
+
   return (
     <div className="counter-container">
       <button onClick={decrement} disabled={count === 1}>

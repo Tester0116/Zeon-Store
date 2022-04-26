@@ -16,25 +16,12 @@ const Cart = () => {
 
   const { getCartData } = useSelector((state) => state.appReducer)
 
-  const [count, setCount] = useState(1)
-
   const [totalCount, setTotalCount] = useState(1)
-
-  const change = (number) => {
-    console.log(
-      // getCartData?.reduce((i, k) => i + Number(k.discount * k.counter), 0)
-      getCartData
-    )
-  }
-
   // const localPrice = getCartData.reduce(
   //   (i, k) => Number(i.discount) + Number(k.discount)
   // )
   // const localDiscount = getCartData.reduce(
   //   (i, k) => Number(i.discount) + Number(k.discount)
-  // )
-  // console.log(
-  //   getCartData?.reduce((i, k) => i + Number(k.discount * k.counter), 0)
   // )
   return (
     <section>
@@ -80,12 +67,11 @@ const Cart = () => {
                           {item.discount && <span>{item.discount} p</span>}
                         </div>
                         {/* --- */}
-                        <Counter index={item.id} />
+                        <Counter index={item.id} count={item?.counter} />
                       </div>
                       <img
                         className="pointer"
-                        onClick={change}
-                        // onClick={() => dispatch(delCartData(item))}
+                        onClick={() => dispatch(delCartData(item))}
                         src={require('../../assets/close-icon.png')}
                         alt="close icon"
                       />
@@ -101,17 +87,33 @@ const Cart = () => {
                 {/* ---------- */}
                 <div className="fdrow">
                   <span>Количество линеек: </span>
-                  <span>{totalCount + 1}</span>
+                  <span>
+                    {console.log(
+                      getCartData?.reduce(
+                        (i, k) => i + Number(k.counter + k.counter),
+                        0
+                      )
+                    )}
+                  </span>
                 </div>
                 {/* ---------- */}
                 <div className="fdrow">
                   <span>Количество товаров: </span>
-                  <span>{(totalCount + 1) * 5}</span>
+                  <span>
+                    {getCartData?.reduce(
+                      (i, k) => i + Number(k.counter * k.count),
+                      0
+                    )}
+                  </span>
                 </div>
                 {/* ---------- */}
                 <div className="fdrow">
                   <span>Стоимость: </span>
                   <span>
+                    {getCartData?.reduce(
+                      (i, k) => i + Number(k.discount * k.counter),
+                      0
+                    )}
                     {/* {getCartData?.reduce(
                       (i, k) => i + Number(k.discount * count),
                       0

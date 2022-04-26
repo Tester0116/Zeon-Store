@@ -1,10 +1,11 @@
+export const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
+export const DECREMENT_COUNTER = 'DECREMENT_COUNTER'
 export const COLLECTIONS_DATA = 'COLLECTIONS_DATA'
 export const CATEGORIES_DATA = 'CATEGORIES_DATA'
 export const DETAILPAGE_DATA = 'DETAILPAGE_DATA'
 export const UNSET_FAVOURITE = 'UNSET_FAVOURITE'
 export const SET_FAVOURITE = 'SET_FAVOURITE'
 export const BENEFIT_DATA = 'BENEFIT_DATA'
-export const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
 export const DELCART_DATA = 'DELCART_DATA'
 export const HOME_BANNER = 'HOME_BANNER'
 export const FRESH_DATA = 'FRESH_DATA'
@@ -27,6 +28,12 @@ export const setCollectionsData = (payload) => ({
 // ----------------------------
 export const incrementCartCounter = (payload) => ({
   type: INCREMENT_COUNTER,
+  payload,
+})
+// ----------------------------
+// ----------------------------
+export const decrementCartCounter = (payload) => ({
+  type: DECREMENT_COUNTER,
   payload,
 })
 // ----------------------------

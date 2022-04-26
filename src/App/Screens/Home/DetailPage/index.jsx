@@ -134,7 +134,12 @@ const DetailPage = (props) => {
               {/* --------------- */}
               <div className="fdrow detail-container__aboutprice">
                 <span>{getDetailData.price} p</span>
-                <span>{getDetailData.discount} p</span>
+                {getDetailData.discount && (
+                  <span className="hit-block__discount">
+                    {getDetailData.discount} p
+                  </span>
+                )}
+                <span />
               </div>
               {/* --------------- */}
               <div className="detail-container__abouttext">
@@ -241,7 +246,7 @@ const DetailPage = (props) => {
                           onClick={() => dispatch(setDetailData(item))}
                           key={img.id}
                         >
-                          <Link to="detailpage">
+                          <Link to="/detailpage">
                             <img
                               onClick={() => dispatch(setDetailData(item))}
                               src={img.imgUrl}
@@ -279,7 +284,7 @@ const DetailPage = (props) => {
                     )}
                   </div>
                   {/* ---- end img block ----- */}
-                  <Link to="detailpage">
+                  <Link to="/detailpage">
                     <div
                       onClick={() => dispatch(setDetailData(item))}
                       className="hit-block__textdiv"
