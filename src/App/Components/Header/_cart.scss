@@ -1,0 +1,120 @@
+.cart-container {
+  margin-top: 75px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  &__cartblock {
+    width: 100%;
+  }
+  &__cartitem {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 166px;
+    padding: 12px;
+    background-color: white;
+    position: relative;
+    & > img {
+      width: 112px;
+      height: 142px;
+      object-fit: cover;
+    }
+    & > :last-child {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+  &__counterblock {
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    // title
+    & > :first-child {
+      font: 400 14px 'Montserrat';
+      line-height: 17px;
+      color: #393939;
+    }
+    // size
+    & > :nth-child(2) {
+      margin-top: 15px;
+      font: 400 13px 'Montserrat';
+      line-height: 16px;
+      color: #7c7c7c;
+    }
+    // color block-fdrow
+    & > :nth-child(3) {
+      margin-top: 6px;
+      // span
+      & > :first-child {
+        font: 400 13px 'Montserrat';
+        line-height: 16px;
+        color: #7c7c7c;
+      }
+      // color-block-square
+      & > :last-child {
+        margin-left: 4px;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #e7e7e7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // color
+        & > :first-child {
+          border: 1px solid #d1d1d1;
+
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          transform: translate(6%) translateY(0%);
+        }
+      }
+    }
+    // price-discount-fdrow
+    & > :nth-child(4) {
+      margin-top: 6px;
+      // price
+      & > :first-child {
+        font: 500 18px 'Montserrat';
+        line-height: 22px;
+        color: #393939;
+      }
+      // discount
+      & > :last-child {
+        margin-left: 6px;
+        font: 400 14px 'Montserrat';
+        line-height: 17px;
+        text-decoration-line: line-through;
+        color: #adadad;
+        align-self: flex-end;
+      }
+    }
+  }
+  // ------------
+  &__orderblock {
+    width: 390px;
+    min-height: 311px;
+    padding: 24px;
+    background-color: white;
+  }
+}
+
+.cart-item-enter {
+  opacity: 0;
+}
+.cart-item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.cart-item-exit {
+  opacity: 1;
+}
+.cart-item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}

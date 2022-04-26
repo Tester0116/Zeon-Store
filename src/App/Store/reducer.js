@@ -1,9 +1,11 @@
 import {
+  INCREMENT_COUNTER,
   COLLECTIONS_DATA,
   CATEGORIES_DATA,
   UNSET_FAVOURITE,
   DETAILPAGE_DATA,
   SET_FAVOURITE,
+  DELCART_DATA,
   BENEFIT_DATA,
   HOME_BANNER,
   FRESH_DATA,
@@ -40,11 +42,34 @@ export default function appReducer(state = initialState, action) {
         getFavourite: state.getFavourite.filter((fav) => fav.id !== payload.id),
       }
     // ------------------
+    case DELCART_DATA:
+      return {
+        ...state,
+        getCartData: state.getCartData.filter((fav) => fav.id !== payload.id),
+      }
+    // ------------------
     case SET_FAVOURITE:
       return { ...state, getFavourite: [...state.getFavourite, payload] }
     // ------------------
     case CART_DATA:
       return { ...state, getCartData: [...state.getCartData, payload] }
+    // ------------------
+    case INCREMENT_COUNTER: {
+      const item = state.getCartData.map((item) => {
+        if (item.id === action.payload) {
+          return {
+            ...item,
+            counter: item.counter + 1,
+          }
+        }
+        return item
+      })
+
+      return {
+        ...state,
+        getCartData: item,
+      }
+    }
     // ------------------
     case COLLECTIONS_DATA:
       return { ...state, getCollectionsData: payload }

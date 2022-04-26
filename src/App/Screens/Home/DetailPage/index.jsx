@@ -27,6 +27,8 @@ const DetailPage = (props) => {
   }, [])
 
   const [itemId, setItemId] = useState(-1)
+  const [colorOver, setColorOver] = useState(-1)
+  const [colorClicked, setColorClicked] = useState(0)
 
   const breadCrums = [
     { id: 2, text: 'Коллекция' },
@@ -37,9 +39,12 @@ const DetailPage = (props) => {
   const AddCart = () => {
     const index = getCartData?.map((i, k) => i.id)
 
+    getDetailData['selectedColor'] = colorClicked
+    getDetailData['counter'] = 1
     if (Boolean(getCartData.length !== 0)) {
       if (Boolean(index.includes(getDetailData.id))) navigate('/cart')
       else dispatch(setCartData(getDetailData))
+      // dispatch(setCartData([...getDetailData, colorClicked]))
     } else dispatch(setCartData(getDetailData))
   }
   const AddFavourite = () => {
@@ -70,14 +75,28 @@ const DetailPage = (props) => {
             <div className="detail-container__imgblock">
               <div className="detail-container__firstimg">
                 {getDetailData.imgNcolors.slice(0, 4).map((i, k) => (
-                  <img src={i.imgUrl} alt="detail img" />
+                  <img
+                    className={colorOver === i.id ? 'hovered' : undefined}
+                    onMouseOver={() => setColorOver(i.id)}
+                    onMouseOut={() => setColorOver(-1)}
+                    src={i.imgUrl}
+                    alt="detail img"
+                    key={i.id}
+                  />
                 ))}
               </div>
               <div className="detail-container__secondimg">
                 {getDetailData.imgNcolors
                   .slice(4, getDetailData.imgNcolors.length)
                   .map((i, k) => (
-                    <img src={i.imgUrl} alt="detail img" />
+                    <img
+                      className={colorOver === i.id ? 'hovered' : undefined}
+                      onMouseOver={() => setColorOver(i.id)}
+                      onMouseOut={() => setColorOver(-1)}
+                      src={i.imgUrl}
+                      alt="detail img"
+                      key={i.id}
+                    />
                   ))}
               </div>
             </div>
@@ -94,7 +113,19 @@ const DetailPage = (props) => {
                 <span>Цвет: </span>
                 <div className="fdrow">
                   {getDetailData.imgNcolors.map((i, k) => (
-                    <div className="detail-container__coloritems" key={i.id}>
+                    <div
+                      className={
+                        colorClicked === i.id
+                          ? 'detail-container__coloritems hovered'
+                          : colorOver === i.id
+                          ? 'detail-container__coloritems hovered'
+                          : 'detail-container__coloritems'
+                      }
+                      onMouseOver={() => setColorOver(i.id)}
+                      onMouseOut={() => setColorOver(-1)}
+                      onClick={() => setColorClicked(i.id)}
+                      key={i.id}
+                    >
                       <div style={{ backgroundColor: i.color }} />
                     </div>
                   ))}

@@ -1,0 +1,27 @@
+.counter-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 12px;
+  & > button {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background-color: #efefef;
+    border: 1px solid #efefef;
+    & > img {
+      width: 12px;
+      height: 12px;
+      object-fit: contain;
+    }
+  }
+  &__spanblock {
+    width: 32px;
+    margin-left: 22px;
+    & > span {
+      font: 600 16px 'Montserrat';
+      line-height: 20px;
+      color: #393939;
+    }
+  }
+}
