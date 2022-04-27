@@ -8,17 +8,22 @@
 
 .hit-block {
   display: grid;
+  margin-bottom: 50px;
   grid-template-columns: repeat(4, 1fr);
   &__categories {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
   }
   gap: 8px;
+
   &__item {
     display: flex;
     flex-direction: column;
     background-color: white;
     min-height: 536px;
+    &.fav {
+      background-color: transparent;
+    }
   }
 
   &__imgblock {

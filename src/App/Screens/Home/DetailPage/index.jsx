@@ -226,6 +226,7 @@ const DetailPage = (props) => {
           <div className="hit-block hit-block__categories">
             {getCollectionsData[0]?.allData
               .filter((i, k) => i.title === getDetailData.title)
+              .filter((i, k) => i.id !== getDetailData.id)
               .filter((i, k) => k <= 4)
               .map((item, key) => (
                 <div className="hit-block__item" key={item.id}>

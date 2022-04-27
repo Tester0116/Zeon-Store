@@ -56,16 +56,18 @@ const Header = ({ breadCrums }) => {
             </a>
           </div>
           <div className="fdrow posr">
-            <div className="header-second__block-favourite header-second__block-dot">
-              <div className="posr">
-                {Boolean(getFavourite.length !== 0) && <span />}
-                <img
-                  alt="favourite"
-                  src={require('../../assets/favourite.png')}
-                />
+            <Link to="/favourite">
+              <div className="header-second__block-favourite header-second__block-dot">
+                <div className="posr">
+                  {Boolean(getFavourite.length !== 0) && <span />}
+                  <img
+                    alt="favourite"
+                    src={require('../../assets/favourite.png')}
+                  />
+                </div>
+                <a>Избранное</a>
               </div>
-              <a>Избранное</a>
-            </div>
+            </Link>
             <Link to="/cart">
               <div className="header-second__block-favourite header-second__block-dot">
                 <div className="posr">

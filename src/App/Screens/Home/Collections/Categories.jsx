@@ -265,11 +265,6 @@ const Categories = () => {
           <LoadingSpinner />
         )}
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <ScrollToTop />
       <Footer />
     </section>

@@ -6,6 +6,7 @@ export const DETAILPAGE_DATA = 'DETAILPAGE_DATA'
 export const UNSET_FAVOURITE = 'UNSET_FAVOURITE'
 export const SET_FAVOURITE = 'SET_FAVOURITE'
 export const BENEFIT_DATA = 'BENEFIT_DATA'
+export const SUPPORT_DATA = 'SUPPORT_DATA'
 export const DELCART_DATA = 'DELCART_DATA'
 export const HOME_BANNER = 'HOME_BANNER'
 export const FRESH_DATA = 'FRESH_DATA'
@@ -42,6 +43,8 @@ export const unSetFavourite = (payload) => ({ type: UNSET_FAVOURITE, payload })
 export const setDetailData = (payload) => ({ type: DETAILPAGE_DATA, payload })
 // ----------------------------
 export const setBenefitData = (payload) => ({ type: BENEFIT_DATA, payload })
+// ----------------------------
+export const setSupportData = (payload) => ({ type: SUPPORT_DATA, payload })
 // ----------------------------
 export const setFavourite = (payload) => ({ type: SET_FAVOURITE, payload })
 // ----------------------------

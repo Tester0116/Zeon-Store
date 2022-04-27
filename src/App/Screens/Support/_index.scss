@@ -1,0 +1,45 @@
+.support-container {
+  display: flex;
+  flex-direction: row;
+  margin: 70px 0;
+  gap: 24px;
+  & > img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+  }
+  &__block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    & > h5 {
+      font: 500 24px 'Montserrat';
+      line-height: 29px;
+      color: #393939;
+    }
+  }
+  &__item {
+    margin-top: 15px;
+    padding: 16px;
+    width: 100%;
+    background-color: white;
+    & :first-child {
+      justify-content: space-between;
+      & > span {
+        font: 400 16px 'Montserrat';
+        line-height: 20px;
+        color: #393939;
+      }
+    }
+    & > p {
+      margin-top: 12px;
+      font: 300 14px 'Montserrat';
+      line-height: 160%;
+      color: #354455;
+    }
+    & img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

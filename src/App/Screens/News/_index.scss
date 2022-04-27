@@ -1,0 +1,36 @@
+.news-container {
+  margin-top: 75px;
+  & > h4 {
+    font: 500 24px 'Montserrat';
+    line-height: 29px;
+    color: #393939;
+  }
+  &__block {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding: 16px;
+    margin-top: 12px;
+    & > img {
+      width: 226px;
+      height: 226px;
+      object-fit: cover;
+    }
+
+    & span {
+      align-self: flex-start;
+      font: 500 16px 'Montserrat';
+      line-height: 20px;
+      color: #393939;
+    }
+    & p {
+      margin-top: 6px;
+      font: 300 14px 'Montserrat';
+      line-height: 165%;
+      color: #5b5b5b;
+    }
+  }
+}

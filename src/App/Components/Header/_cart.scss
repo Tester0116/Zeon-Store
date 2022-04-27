@@ -1,3 +1,165 @@
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  & input {
+    outline: none;
+  }
+  &__block {
+    width: 440px;
+    height: auto;
+    background-color: white;
+    padding: 32px 24px;
+    // block-fdrow
+    & > :first-child {
+      justify-content: space-between;
+      margin-bottom: 24px;
+      // h5-title
+      & > h5 {
+        font: 600 20px 'Montserrat';
+        line-height: 24px;
+        color: #393939;
+      }
+      // close-icon
+      & > :last-child {
+        width: 24px;
+        height: 24px;
+        align-self: flex-start;
+      }
+    }
+    & > form > .fdcol {
+      margin-top: 12px;
+      align-items: flex-start;
+    }
+    & > form > .fdcol > label {
+      font: 500 13px 'Montserrat';
+      line-height: 16px;
+      color: #808080;
+    }
+    // phone input
+    & > form > .fdcol > .inputs {
+      padding: 13px 12px;
+      margin-top: 4px;
+      width: 100%;
+      border: 1px solid #e7e7e7;
+
+      outline: none;
+      font: 500 14px 'Montserrat';
+      line-height: 17px;
+      color: #1d1d1b;
+      & > input {
+        border: none;
+      }
+      &::placeholder {
+        color: #d0d0d0;
+      }
+    }
+    // all inputs
+    & > form > .fdcol > input {
+      padding: 13px 12px;
+      margin-top: 4px;
+      width: 100%;
+      border: 1px solid #e7e7e7;
+
+      outline: none;
+      font: 500 14px 'Montserrat';
+      line-height: 17px;
+      color: #1d1d1b;
+      &::placeholder {
+        color: #d0d0d0;
+      }
+    }
+    // offer-checkbox
+    & > form > .fdrow {
+      margin-top: 15px;
+      input[type='checkbox'] {
+        display: none;
+      }
+
+      label,
+      span {
+        font: 500 15px 'Inter';
+        line-height: 18px;
+        color: #393939;
+        cursor: pointer;
+        vertical-align: middle;
+      }
+      span {
+        color: #2f80ed;
+        margin-left: 5px;
+        margin-bottom: 2px;
+      }
+
+      label:before {
+        content: url('../../assets/unchecked-icon.svg');
+        vertical-align: middle;
+        margin-right: 11px;
+      }
+
+      input:checked + label:before {
+        content: url('../../assets/checked-icon.svg');
+        vertical-align: middle;
+        margin-right: 11px;
+      }
+    }
+    // button styles
+  }
+  &__sendbtn {
+    margin-top: 35px;
+    width: 100%;
+    height: 44px;
+    font: 500 14px 'Montserrat';
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    background-color: #1d1d1b;
+    &:disabled {
+      background-color: #777776;
+    }
+  }
+  &__formsended-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 28px 24px;
+    width: 328px;
+    height: auto;
+    & > img {
+      width: 60px;
+      height: 60px;
+    }
+    & > h5 {
+      font: 500 22px 'Montserrat';
+      line-height: 100%;
+      color: #393939;
+      margin-top: 14px;
+      margin-bottom: 8px;
+    }
+    & > span {
+      font: 300 14px 'Montserrat';
+      line-height: 150%;
+      color: #393939;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+  }
+}
+// --------------------
 .cart-container {
   margin-top: 75px;
   justify-content: space-between;
@@ -97,13 +259,77 @@
   }
   // ------------
   &__orderblock {
-    width: 390px;
-    min-height: 311px;
+    min-width: 390px;
+    height: 311px;
     padding: 24px;
     background-color: white;
+    & > button {
+      background-color: #e5271b;
+      width: 100%;
+      height: 44px;
+      text-align: center;
+      align-self: center;
+      font: 500 14px 'Montserrat';
+      line-height: 17px;
+      color: #ffffff;
+      margin-top: 16px;
+    }
+  }
+  &__order-detailblock {
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px dashed #bfbfbf;
+    & > :first-child {
+      font: 500 14px 'Montserrat';
+      line-height: 17px;
+      color: #393939;
+    }
+  }
+  &__orderitem {
+    justify-content: space-between;
+    margin-top: 12px;
+    & > :first-child {
+      font: 400 14px 'Montserrat';
+      line-height: 17px;
+      color: #979797;
+    }
+    & > :last-child {
+      font: 400 14px 'Montserrat';
+      line-height: 17px;
+      color: #393939;
+    }
   }
 }
-
+// ----------------------------
+.emptycart-container {
+  & > h5 {
+    font: 500 24px 'Montserrat';
+    line-height: 29px;
+    color: #393939;
+    margin-top: 70px;
+  }
+  & > h4 {
+    font: 500 24px 'Montserrat';
+    line-height: 29px;
+    color: #393939;
+    margin-top: 50px;
+  }
+}
+// ----------------------------
+.favourite-container {
+  & > h5 {
+    font: 500 24px 'Montserrat';
+    line-height: 29px;
+    color: #393939;
+    margin-top: 70px;
+  }
+  & > p {
+    font: 500 14px 'Montserrat';
+    line-height: 17px;
+    color: #979797;
+  }
+}
+// ----------------------------
 .cart-item-enter {
   opacity: 0;
 }

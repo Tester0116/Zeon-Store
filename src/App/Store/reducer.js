@@ -7,6 +7,7 @@ import {
   DETAILPAGE_DATA,
   SET_FAVOURITE,
   DELCART_DATA,
+  SUPPORT_DATA,
   BENEFIT_DATA,
   HOME_BANNER,
   FRESH_DATA,
@@ -21,6 +22,7 @@ const initialState = {
   getCollectionsData: [],
   getCategoriesData: [],
   getBenefitData: [],
+  getSupportData: [],
   getHomeBanner: [],
   getDetailData: [],
   getFavourite: [],
@@ -94,6 +96,9 @@ export default function appReducer(state = initialState, action) {
     // ------------------
     case CATEGORIES_DATA:
       return { ...state, getCategoriesData: payload }
+    // ------------------
+    case SUPPORT_DATA:
+      return { ...state, getSupportData: payload }
     // ------------------
     case BENEFIT_DATA:
       return { ...state, getBenefitData: payload }
