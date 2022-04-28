@@ -55,7 +55,7 @@ const App = () => {
     db.collection('News').onSnapshot((snapshot) =>
       dispatch(setNewsData(snapshot.docs.map((doc) => doc.data())))
     )
-    setTimeout(() => dispatch(setLoad(false)), 3500)
+    setTimeout(() => dispatch(setLoad(false)), 5000)
   }, [])
 
   return (

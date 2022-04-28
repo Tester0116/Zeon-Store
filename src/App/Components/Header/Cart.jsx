@@ -340,7 +340,11 @@ const Cart = () => {
               <div className="fdrow cart-container__orderitem">
                 <span>Стоимость: </span>
                 <span>
-                  {getCartData?.reduce((i, k) => i + +k.price, 0)} рублей
+                  {getCartData?.reduce(
+                    (i, k) => i + Number(k.price * k.counter),
+                    0
+                  )}{' '}
+                  рублей
                 </span>
               </div>
               <button onClick={() => setModal(true)}>Оформить заказ</button>

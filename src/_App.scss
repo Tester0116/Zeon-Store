@@ -33,6 +33,9 @@
   background-color: transparent !important;
 }
 // ##### SWIPER STYLES START #####
+.carousel-block {
+  overflow-y: scroll;
+}
 .swiper {
   width: 100%;
   height: 488px;

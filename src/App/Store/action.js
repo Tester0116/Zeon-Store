@@ -9,11 +9,12 @@ export const BENEFIT_DATA = 'BENEFIT_DATA'
 export const SUPPORT_DATA = 'SUPPORT_DATA'
 export const DELCART_DATA = 'DELCART_DATA'
 export const HOME_BANNER = 'HOME_BANNER'
+export const SEARCH_DATA = 'SEARCH_DATA'
 export const FRESH_DATA = 'FRESH_DATA'
-export const CART_DATA = 'CART_DATA'
-export const SET_ABOUT = 'SET_ABOUT'
 export const NEWS_DATA = 'NEWS_DATA'
+export const CART_DATA = 'CART_DATA'
 export const SPIN_LOAD = 'SPIN_LOAD'
+export const SET_ABOUT = 'SET_ABOUT'
 export const HIT_DATA = 'HIT_DATA'
 
 // ----------------------------
@@ -45,6 +46,8 @@ export const setDetailData = (payload) => ({ type: DETAILPAGE_DATA, payload })
 export const setBenefitData = (payload) => ({ type: BENEFIT_DATA, payload })
 // ----------------------------
 export const setSupportData = (payload) => ({ type: SUPPORT_DATA, payload })
+// ----------------------------
+export const setSearchData = (payload) => ({ type: SEARCH_DATA, payload })
 // ----------------------------
 export const setFavourite = (payload) => ({ type: SET_FAVOURITE, payload })
 // ----------------------------

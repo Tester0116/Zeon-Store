@@ -41,7 +41,7 @@
   }
   &__block-input {
     margin-left: 35px;
-    width: auto;
+    width: 100%;
     border: 1px solid #e0e0e0;
     height: 44px;
     width: 50vmax;
@@ -58,6 +58,39 @@
   }
   &__block-inputdiv {
     position: relative;
+  }
+  // datalist
+  &__block-inputdiv > .detail-block {
+    padding: 0 20px;
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 35px);
+    margin-left: 35px;
+    max-height: 310px;
+    background-color: white;
+    z-index: 300;
+    overflow-y: auto;
+    border: 1px solid #d3d3d3;
+    border-top-width: 0;
+    &::-webkit-scrollbar-thumb {
+      background-color: #979797;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #eeeeee;
+    }
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+    // item
+    & > span {
+      font: 400 14px 'Montserrat';
+      font-size: 14px;
+      color: #1d1d1b;
+      padding: 16px 0;
+      border-bottom: 1px solid #eeeeee;
+    }
   }
   &__block-inputdiv > a {
     position: absolute;

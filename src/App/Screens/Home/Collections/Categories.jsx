@@ -14,20 +14,24 @@ import {
   unSetFavourite,
 } from '../../../Store/action'
 
-import './pagination.scss'
 import '../_collection.scss'
 import '../_hits.scss'
 import './_index.scss'
 
 const Categories = () => {
   //   --------------------------------------
-  const { getCategoriesData, getFavourite, getFreshData } = useSelector(
-    (store) => store.appReducer
-  )
+  const { getCategoriesData, getFavourite, getFreshData, getCollectionsData } =
+    useSelector((store) => store.appReducer)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // ------ pagination ------
 
+  useEffect(
+    () => getCategoriesData.length === 0 && navigate('/', { replace: true }),
+    []
+  )
+  {
+  }
+  // ------ pagination ------
   const [currentPage, setCurrentPage] = useState(1)
   let PageSize = 12
   const currentCategoriesData = useMemo(() => {
@@ -56,14 +60,14 @@ const Categories = () => {
       />
 
       <div className="container">
-        {getCategoriesData.allData.length !== 0 ? (
+        {getCategoriesData?.allData.length !== 0 ? (
           <>
             <div className="collections-container">
               <h5>{getCategoriesData.itemType}</h5>
               {/* ----------------------------------------------- */}
               <div className="collections-container__paginationblock">
                 {currentCategoriesData.map((item, key) => (
-                  <div className="hit-block__item">
+                  <div className="hit-block__item" key={key}>
                     <div className="hit-block__imgblock">
                       <Carousel
                         fade
@@ -81,7 +85,7 @@ const Categories = () => {
                             onClick={() => dispatch(setDetailData(item))}
                             key={img.id}
                           >
-                            <Link to="detailpage">
+                            <Link to="/detailpage">
                               <img
                                 onClick={() => dispatch(setDetailData(item))}
                                 src={img.imgUrl}
@@ -120,7 +124,7 @@ const Categories = () => {
                       )}
                     </div>
                     {/* ---- end img block ----- */}
-                    <Link to="detailpage">
+                    <Link to="/detailpage">
                       <div
                         onClick={() => dispatch(setDetailData(item))}
                         className="hit-block__textdiv"
@@ -149,9 +153,7 @@ const Categories = () => {
                   </div>
                 ))}
               </div>
-
               {/* ---------------- */}
-
               <CustomPagination
                 className="pagination-bar"
                 currentPage={currentPage}

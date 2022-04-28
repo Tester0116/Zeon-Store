@@ -7,6 +7,7 @@ import CollectionScreen from './App/Screens/Home/Collections/CollectionScreen'
 import Categories from './App/Screens/Home/Collections/Categories'
 import Favourite from './App/Components/Header/Favourite'
 import DetailPage from './App/Screens/Home/DetailPage'
+import SearchPage from './App/Screens/SearchPage'
 import Cart from './App/Components/Header/Cart'
 import Support from './App/Screens/Support'
 import About from './App/Screens/About'
@@ -36,6 +37,7 @@ root.render(
           />
           <Route path="detailpage" element={<DetailPage />} />
           <Route path="offer" element={<Offer />} />
+          <Route path="searchpage" element={<SearchPage />} />
           <Route path="cart" element={<Cart />} />
           <Route path="favourite" element={<Favourite />} />
           <Route path="news" element={<News />} />

@@ -1,12 +1,60 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { setCategoriesData, setSearchData } from '../../Store/action'
 import './_index.scss'
 
 const Header = ({ breadCrums }) => {
-  const { getFavourite, getCartData } = useSelector((store) => store.appReducer)
+  const { getFavourite, getCartData, getCollectionsData } = useSelector(
+    (store) => store.appReducer
+  )
   const navigate = useNavigate()
+
+  const dispatch = useDispatch()
+
+  const [searchValue, setSearchValue] = useState('')
+  const [searchResult, setSearchResult] = useState([])
+  const [focused, setFocused] = useState(false)
+
+  const __ItemHandler = (i) => {
+    if (searchResult.length !== 0 && searchValue.length !== 0) {
+      dispatch(setSearchData(searchResult))
+      navigate('/searchpage')
+    } else setSearchValue(i.target.innerText)
+  }
+
+  const __SearchbtnHandler = () => {
+    if (searchValue.length !== 0 && searchResult.length === 0) {
+      alert('Этот товар не в наличии. Выберите другой')
+      setSearchValue('')
+    }
+    if (searchResult.length === 0 || searchValue.length === 0) setFocused(true)
+    else {
+      dispatch(setSearchData(searchResult))
+      navigate('/searchpage')
+    }
+  }
+
+  const breadCrumHandler = (crum) => {
+    // crum.id !== 0 && navigate(-crum.id)
+    if (crum.text === 'Коллекция') return navigate('/collections')
+    if (breadCrums.length === 3) {
+      dispatch(setCategoriesData(getCollectionsData[0]))
+      navigate('/collections/categories')
+      return
+    }
+  }
+
+  useEffect(() => {
+    const results = getCollectionsData
+      ?.sort((a, b) => b.id - a.id)
+      .filter((person) =>
+        person.itemType.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    setSearchResult(results)
+  }, [searchValue])
+
   return (
     <header className="parent-block">
       <div className="container">
@@ -45,8 +93,30 @@ const Header = ({ breadCrums }) => {
             />
           </Link>
           <div className="header-second__block-inputdiv">
-            <input className="header-second__block-input" placeholder="Поиск" />
-            <a className="header-second__block-inputicon">
+            <input
+              className="header-second__block-input"
+              placeholder="Поиск"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              autoFocus={focused}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+            />
+            {focused && searchResult.length !== 0 && (
+              <div className="detail-block">
+                {searchResult
+                  ?.sort((a, b) => b.id - a.id)
+                  .map((i, k) => (
+                    <span onClick={(i) => __ItemHandler(i)} key={k}>
+                      {i.itemType}
+                    </span>
+                  ))}
+              </div>
+            )}
+            <a
+              className="header-second__block-inputicon"
+              onClick={__SearchbtnHandler}
+            >
               <img
                 width={24}
                 height={24}
@@ -55,6 +125,7 @@ const Header = ({ breadCrums }) => {
               />
             </a>
           </div>
+
           <div className="fdrow posr">
             <Link to="/favourite">
               <div className="header-second__block-favourite header-second__block-dot">
@@ -69,7 +140,7 @@ const Header = ({ breadCrums }) => {
               </div>
             </Link>
             <Link to="/cart">
-              <div className="header-second__block-favourite header-second__block-dot">
+              <div className="header-second__block-favourite">
                 <div className="posr">
                   {Boolean(getCartData.length !== 0) && <span />}
                   <img alt="cart" src={require('../../assets/cart.png')} />
@@ -91,10 +162,7 @@ const Header = ({ breadCrums }) => {
             <span onClick={() => navigate('/')}>Главная</span>
 
             {breadCrums.map((crum, key) => (
-              <span
-                onClick={() => crum.id !== 0 && navigate(-crum.id)}
-                key={crum.id}
-              >
+              <span onClick={() => breadCrumHandler(crum)} key={crum.id}>
                 {crum.text}
               </span>
             ))}

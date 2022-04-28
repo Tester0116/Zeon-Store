@@ -13,6 +13,7 @@
     display: flex;
     flex-direction: column;
     & > h5 {
+      margin-top: -6px;
       font: 500 24px 'Montserrat';
       line-height: 29px;
       color: #393939;
@@ -31,15 +32,21 @@
         color: #393939;
       }
     }
-    & > p {
-      margin-top: 12px;
-      font: 300 14px 'Montserrat';
-      line-height: 160%;
-      color: #354455;
-    }
     & img {
       width: 20px;
       height: 20px;
+      transform: rotate(180deg);
+      &.active {
+        transform: rotate(0deg);
+      }
     }
+    transition: all 0.5s ease;
+  }
+  &__item-description {
+    margin-top: 12px;
+    font: 300 14px 'Montserrat';
+    line-height: 160%;
+    color: #354455;
+    transition: all 0.5s ease;
   }
 }

@@ -35,7 +35,7 @@ const Collections = () => {
                   <button
                     onClick={() => {
                       dispatch(setCategoriesData(item))
-                      navigate('collections/categories')
+                      navigate('/collections/categories')
                     }}
                   >
                     <span>Смотреть все</span>

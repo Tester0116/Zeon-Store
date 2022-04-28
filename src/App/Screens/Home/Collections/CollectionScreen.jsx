@@ -10,7 +10,6 @@ import Header from '../../../Components/Header'
 import Footer from '../../../Components/Footer'
 import { db } from '../../../config/fbConfig'
 
-import './pagination.scss'
 import '../_collection.scss'
 import './_index.scss'
 
@@ -53,13 +52,10 @@ const CollectionScreen = () => {
                     />
                     <span>{item.itemType}</span>
                     <button
-                      onClick={
-                        // sendData
-                        () => {
-                          dispatch(setCategoriesData(item))
-                          navigate('categories')
-                        }
-                      }
+                      onClick={() => {
+                        dispatch(setCategoriesData(item))
+                        navigate('categories')
+                      }}
                     >
                       <span>Смотреть все</span>
                       <div></div>
