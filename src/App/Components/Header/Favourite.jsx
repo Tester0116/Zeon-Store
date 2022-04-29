@@ -4,12 +4,13 @@ import ru from 'react-phone-number-input/locale/ru.json'
 import { useDispatch, useSelector } from 'react-redux'
 import PhoneInput from 'react-phone-number-input'
 import { useNavigate, Link } from 'react-router-dom'
-import Carousel from 'react-bootstrap/Carousel'
 
 import ScrollToTop from '../../Components/ScrollToTop'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
+import CustomSlider from '../Slider'
 import Counter from '../Counter'
+
 import {
   delCartData,
   unSetFavourite,
@@ -49,32 +50,10 @@ const Favourite = () => {
               {getFavourite.map((item, key) => (
                 <div className="hit-block__item" key={item.id}>
                   <div className="hit-block__imgblock">
-                    <Carousel
-                      fade
-                      keyboard={false}
-                      controls={false}
-                      interval={key === itemId ? 1000 : null}
-                      pause={false}
-                      indicators={key === itemId}
-                    >
-                      {item.imgNcolors.map((img, index) => (
-                        <Carousel.Item
-                          className="hit-block__swiper"
-                          onMouseOver={() => setItemId(key)}
-                          onMouseLeave={() => setItemId(-1)}
-                          onClick={() => dispatch(setDetailData(item))}
-                          key={img.id}
-                        >
-                          <Link to="detailpage">
-                            <img
-                              onClick={() => dispatch(setDetailData(item))}
-                              src={img.imgUrl}
-                              alt="img"
-                            />
-                          </Link>
-                        </Carousel.Item>
-                      ))}
-                    </Carousel>
+                    <CustomSlider
+                      detailData={item}
+                      sliderImage={item.imgNcolors}
+                    />
 
                     <img
                       style={{ cursor: 'pointer' }}
@@ -143,33 +122,11 @@ const Favourite = () => {
                 .filter((i, k) => k < 5)
                 .map((item, key) => (
                   <div className="hit-block__item" key={item.id}>
-                    <div className="hit-block__imgblock">
-                      <Carousel
-                        fade
-                        keyboard={false}
-                        controls={false}
-                        interval={key === itemId ? 1000 : null}
-                        pause={false}
-                        indicators={key === itemId}
-                      >
-                        {item.imgNcolors.map((img, index) => (
-                          <Carousel.Item
-                            className="hit-block__swiper"
-                            onMouseOver={() => setItemId(key)}
-                            onMouseLeave={() => setItemId(-1)}
-                            onClick={() => dispatch(setDetailData(item))}
-                            key={img.id}
-                          >
-                            <Link to="/detailpage">
-                              <img
-                                onClick={() => dispatch(setDetailData(item))}
-                                src={img.imgUrl}
-                                alt="img"
-                              />
-                            </Link>
-                          </Carousel.Item>
-                        ))}
-                      </Carousel>
+                    <div className="hit-block__imgblock  nth-five">
+                      <CustomSlider
+                        detailData={item}
+                        sliderImage={item.imgNcolors}
+                      />
 
                       <img
                         style={{ cursor: 'pointer' }}

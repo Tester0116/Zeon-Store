@@ -4,6 +4,7 @@ import {
   COLLECTIONS_DATA,
   CATEGORIES_DATA,
   UNSET_FAVOURITE,
+  EMPTY_CART_DATA,
   DETAILPAGE_DATA,
   SET_FAVOURITE,
   DELCART_DATA,
@@ -86,6 +87,9 @@ export default function appReducer(state = initialState, action) {
         ...state,
         getCartData: state.getCartData.filter((fav) => fav.id !== payload.id),
       }
+    // ------------------
+    case EMPTY_CART_DATA:
+      return { ...state, getCartData: payload }
     // ------------------
     case SET_FAVOURITE:
       return { ...state, getFavourite: [...state.getFavourite, payload] }

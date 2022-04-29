@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Carousel from 'react-bootstrap/Carousel'
 import { Link, useNavigate } from 'react-router-dom'
 
 import CustomPagination from '../../../Components/Pagination'
 import ScrollToTop from '../../../Components/ScrollToTop'
 import LoadingSpinner from '../../../Components/Spinner'
+import CustomSlider from '../../../Components/Slider'
 import Header from '../../../Components/Header'
 import Footer from '../../../Components/Footer'
 import {
@@ -20,17 +20,14 @@ import './_index.scss'
 
 const Categories = () => {
   //   --------------------------------------
-  const { getCategoriesData, getFavourite, getFreshData, getCollectionsData } =
-    useSelector((store) => store.appReducer)
+  const { getCategoriesData, getFavourite, getFreshData } = useSelector(
+    (store) => store.appReducer
+  )
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  useEffect(
-    () => getCategoriesData.length === 0 && navigate('/', { replace: true }),
-    []
-  )
-  {
-  }
+  // useEffect(() => getCategoriesData.length === 0 && navigate('/'), [])
+
   // ------ pagination ------
   const [currentPage, setCurrentPage] = useState(1)
   let PageSize = 12
@@ -60,41 +57,19 @@ const Categories = () => {
       />
 
       <div className="container">
-        {getCategoriesData?.allData.length !== 0 ? (
+        {getCategoriesData?.length !== 0 ? (
           <>
             <div className="collections-container">
               <h5>{getCategoriesData.itemType}</h5>
               {/* ----------------------------------------------- */}
               <div className="collections-container__paginationblock">
-                {currentCategoriesData.map((item, key) => (
+                {currentCategoriesData?.map((item, key) => (
                   <div className="hit-block__item" key={key}>
                     <div className="hit-block__imgblock">
-                      <Carousel
-                        fade
-                        keyboard={false}
-                        controls={false}
-                        interval={key === itemId ? 1000 : null}
-                        pause={false}
-                        indicators={key === itemId}
-                      >
-                        {item.imgNcolors.map((img, index) => (
-                          <Carousel.Item
-                            className="hit-block__swiper"
-                            onMouseOver={() => setItemId(key)}
-                            onMouseLeave={() => setItemId(-1)}
-                            onClick={() => dispatch(setDetailData(item))}
-                            key={img.id}
-                          >
-                            <Link to="/detailpage">
-                              <img
-                                onClick={() => dispatch(setDetailData(item))}
-                                src={img.imgUrl}
-                                alt="img"
-                              />
-                            </Link>
-                          </Carousel.Item>
-                        ))}
-                      </Carousel>
+                      <CustomSlider
+                        detailData={item}
+                        sliderImage={item.imgNcolors}
+                      />
 
                       <img
                         style={{ cursor: 'pointer' }}
@@ -157,7 +132,7 @@ const Categories = () => {
               <CustomPagination
                 className="pagination-bar"
                 currentPage={currentPage}
-                totalCount={getCategoriesData.allData.length}
+                totalCount={getCategoriesData?.allData.length}
                 pageSize={PageSize}
                 onPageChange={(page) => setCurrentPage(page)}
               />
@@ -171,34 +146,11 @@ const Categories = () => {
                     .filter((i, k) => k + 1 <= 5)
                     .map((item, key) => (
                       <div className="hit-block__item" key={item.id}>
-                        <div className="hit-block__imgblock">
-                          <Carousel
-                            fade
-                            keyboard={false}
-                            controls={false}
-                            interval={key === itemId ? 1000 : null}
-                            pause={false}
-                            indicators={key === itemId}
-                          >
-                            {item.imgNcolors.map((img, index) => (
-                              <Carousel.Item
-                                onMouseOver={() => setItemId(key)}
-                                onMouseLeave={() => setItemId(-1)}
-                                className="hit-block__swiper"
-                                key={img.id}
-                              >
-                                <Link to="detailpage">
-                                  <img
-                                    onClick={() =>
-                                      dispatch(setDetailData(item))
-                                    }
-                                    src={img.imgUrl}
-                                    alt="img"
-                                  />
-                                </Link>
-                              </Carousel.Item>
-                            ))}
-                          </Carousel>
+                        <div className="hit-block__imgblock  nth-five">
+                          <CustomSlider
+                            detailData={item}
+                            sliderImage={item.imgNcolors}
+                          />
 
                           <img
                             style={{ cursor: 'pointer' }}

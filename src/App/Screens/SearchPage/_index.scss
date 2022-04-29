@@ -1,10 +1,6 @@
 .search-container {
   //   background-color: red;
   margin-bottom: 150px;
-  & > :last-child {
-    margin-top: 20px;
-    float: right;
-  }
   & > h5 {
     font: 500 24px 'Montserrat';
     line-height: 29px;
@@ -12,9 +8,20 @@
     margin-top: 92px;
     margin-bottom: 10px;
   }
-  // &__paginationblock {
-  //   display: grid;
-  //   grid-template-columns: repeat(4, 1fr);
-  //   gap: 8px;
-  // }
+  .pagination-bar {
+    margin-top: 20px;
+    float: right;
+  }
+  &.h4 {
+    font: 500 24px 'Montserrat';
+    line-height: 29px;
+    color: #393939;
+    margin-top: 70px;
+  }
+  &.h4 + p {
+    font: 400 16px 'Montserrat';
+    line-height: 20px;
+    color: #393939;
+    margin-top: 16px;
+  }
 }

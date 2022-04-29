@@ -3,12 +3,16 @@
     margin-top: 50px;
     float: right;
   }
-  & > h5 {
+  & > h4,
+  h5 {
     font: 500 24px 'Montserrat';
     line-height: 29px;
-    text-align: left;
+    text-align: center;
     margin-top: 92px;
     margin-bottom: 10px;
+  }
+  & > h5 {
+    text-align: left;
   }
   &__paginationblock {
     display: grid;

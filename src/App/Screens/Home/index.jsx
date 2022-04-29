@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { useSelector } from 'react-redux'
 
 import ScrollToTop from '../../Components/ScrollToTop'
+import CustomSlider from '../../Components/Slider'
 import Collections from './Collections'
 import Fresh from './Fresh'
 import Hits from './Hits'
@@ -24,10 +25,9 @@ const HomeIndex = () => {
   }
 
   return (
-    <div className="container">
-      {/* ------------ */}
+    <>
       {Boolean(getHomeBanner.length !== 0) && (
-        <>
+        <div className="swiper-block">
           <Swiper
             centeredSlides={true}
             autoplay={{
@@ -59,37 +59,40 @@ const HomeIndex = () => {
               ></span>
             ))}
           </div>
-        </>
+        </div>
       )}
-      {/* ------------ */}
-      <ScrollToTop />
-      {/* ------------ */}
-      <Hits />
-      {/* ------------ */}
-      <Fresh />
-      {/* ------------ */}
-      <Collections />
-      {/* ------ BENEFITS ------ */}
-      {getBenefitData.length !== 0 && (
-        <>
-          <h5 className="benefit-block__h5">Наши преимущества</h5>
-          <div className="benefit-block">
-            {getBenefitData
-              .sort((a, b) => a.id - b.id)
-              .map((benefit, index) => (
-                <div key={benefit.id} className="benefit-block__item">
-                  <img
-                    src={require(`../../assets/${benefit.type}-icon.png`)}
-                    alt="cash icon"
-                  />
-                  <span>{benefit.title}</span>
-                  <p>{benefit.text}</p>
-                </div>
-              ))}
-          </div>
-        </>
-      )}
-    </div>
+
+      <div className="container">
+        {/* ------------ */}
+        <ScrollToTop />
+        {/* ------------ */}
+        <Hits />
+        {/* ------------ */}
+        <Fresh />
+        {/* ------------ */}
+        <Collections />
+        {/* ------ BENEFITS ------ */}
+        {getBenefitData.length !== 0 && (
+          <>
+            <h5 className="benefit-block__h5">Наши преимущества</h5>
+            <div className="benefit-block">
+              {getBenefitData
+                .sort((a, b) => a.id - b.id)
+                .map((benefit, index) => (
+                  <div key={benefit.id} className="benefit-block__item">
+                    <img
+                      src={require(`../../assets/${benefit.type}-icon.png`)}
+                      alt="cash icon"
+                    />
+                    <span>{benefit.title}</span>
+                    <p>{benefit.text}</p>
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
+      </div>
+    </>
   )
 }
 

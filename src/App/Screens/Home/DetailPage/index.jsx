@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
-import Carousel from 'react-bootstrap/Carousel'
 
 import LoadingSpinner from '../../../Components/Spinner'
+import CustomSlider from '../../../Components/Slider'
 import Header from '../../../Components/Header'
 import Footer from '../../../Components/Footer'
 
@@ -231,32 +231,10 @@ const DetailPage = (props) => {
               .map((item, key) => (
                 <div className="hit-block__item" key={item.id}>
                   <div className="hit-block__imgblock">
-                    <Carousel
-                      fade
-                      keyboard={false}
-                      controls={false}
-                      interval={key === itemId ? 1000 : null}
-                      pause={false}
-                      indicators={key === itemId}
-                    >
-                      {item.imgNcolors.map((img, index) => (
-                        <Carousel.Item
-                          className="hit-block__swiper"
-                          onMouseOver={() => setItemId(key)}
-                          onMouseLeave={() => setItemId(-1)}
-                          onClick={() => dispatch(setDetailData(item))}
-                          key={img.id}
-                        >
-                          <Link to="/detailpage">
-                            <img
-                              onClick={() => dispatch(setDetailData(item))}
-                              src={img.imgUrl}
-                              alt="img"
-                            />
-                          </Link>
-                        </Carousel.Item>
-                      ))}
-                    </Carousel>
+                    <CustomSlider
+                      detailData={item}
+                      sliderImage={item.imgNcolors}
+                    />
 
                     <img
                       style={{ cursor: 'pointer' }}

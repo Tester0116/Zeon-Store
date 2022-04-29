@@ -17,9 +17,10 @@ const Support = () => {
   const { getSupportData } = useSelector((state) => state.appReducer)
   useEffect(() => {
     // ----- Getting About Data -----
-    db.collection('Support').onSnapshot((snapshot) =>
+    db.collection('Support').onSnapshot((snapshot) => {
       dispatch(setSupportData(snapshot.docs.map((doc) => doc.data())))
-    )
+      console.log(snapshot.docs.map((doc) => doc.data()))
+    })
   }, [])
 
   const [isActive, setIsActive] = useState(1)
@@ -41,13 +42,12 @@ const Support = () => {
       </div>
     )
   }
-
   return (
     <section>
       <Header breadCrums={[{ id: 0, text: 'Публичная оферта' }]} />
 
       <div className="container">
-        {!Boolean(getSupportData.length !== 0) ? (
+        {Boolean(getSupportData.length !== 0) ? (
           <div className="support-container">
             <img src={getSupportData[0].img} alt="Support img" />
             <div className="support-container__block">

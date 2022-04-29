@@ -57,3 +57,22 @@ input[type='number']::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+// $small: 320px;
+// $large: 1024px;
+
+// @media only screen and (max-width: $small) {
+//   .swiper-block {
+//     margin: 0;
+//   }
+// }
+// @media only screen and (min-width: 500px) and (max-width: $large) {
+//   .swiper-block {
+//     margin: 0 105px;
+//   }
+// }
+// @media only screen and (min-width: $large) {
+//   .swiper-block {
+//     margin: 0 105px;
+//   }
+// }

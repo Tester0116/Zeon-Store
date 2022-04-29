@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Carousel from 'react-bootstrap/Carousel'
 import { Link } from 'react-router-dom'
 
 import { setDetailData, setFavourite, unSetFavourite } from '../../Store/action'
@@ -8,6 +7,7 @@ import LoadingSpinner from '../../Components/Spinner'
 import { db } from '../../config/fbConfig'
 
 import './_hits.scss'
+import CustomSlider from '../../Components/Slider'
 
 const Hits = () => {
   const [hitLimit, sethitLimit] = useState(8)
@@ -41,33 +41,12 @@ const Hits = () => {
             .map((item, key) => (
               <div className="hit-block__item" key={item.id}>
                 <div className="hit-block__imgblock">
-                  <Carousel
-                    fade
-                    keyboard={false}
-                    controls={false}
-                    interval={key === itemId ? 1000 : null}
-                    pause={false}
-                    indicators={key === itemId}
-                  >
-                    {item.imgNcolors.map((img, index) => (
-                      <Carousel.Item
-                        className="hit-block__swiper"
-                        onMouseOver={() => setItemId(key)}
-                        onMouseLeave={() => setItemId(-1)}
-                        onClick={() => dispatch(setDetailData(item))}
-                        key={img.id}
-                      >
-                        <Link to="detailpage">
-                          <img
-                            onClick={() => dispatch(setDetailData(item))}
-                            src={img.imgUrl}
-                            alt="img"
-                          />
-                        </Link>
-                      </Carousel.Item>
-                    ))}
-                  </Carousel>
-
+                  {/*  */}
+                  <CustomSlider
+                    detailData={item}
+                    sliderImage={item.imgNcolors}
+                  />
+                  {/*  */}
                   <img
                     style={{ cursor: 'pointer' }}
                     onClick={() => checkFavourite(item, key)}

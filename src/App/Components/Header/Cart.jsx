@@ -4,17 +4,19 @@ import ru from 'react-phone-number-input/locale/ru.json'
 import { useDispatch, useSelector } from 'react-redux'
 import PhoneInput from 'react-phone-number-input'
 import { useNavigate, Link } from 'react-router-dom'
-import Carousel from 'react-bootstrap/Carousel'
 
 import ScrollToTop from '../../Components/ScrollToTop'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
+import CustomSlider from '../Slider'
 import Counter from '../Counter'
+
 import {
   delCartData,
   unSetFavourite,
   setFavourite,
   setDetailData,
+  unSetCartData,
 } from '../../Store/action'
 
 import 'react-phone-number-input/style.css'
@@ -49,6 +51,8 @@ const Cart = () => {
   // -------
   const [sended, setSended] = useState(false)
   // -------
+  const [isDisabled, setIsDisabled] = useState(true)
+  // -------
 
   const EmailHandler = (e) => {
     setEmail(e.target.value)
@@ -67,7 +71,31 @@ const Cart = () => {
       setPhone(e)
     }
   }
-
+  // check modal Send button
+  useEffect(() => {
+    if (name === '') setIsDisabled(true)
+    else if (secondName === '') setIsDisabled(true)
+    else if (email === '') setIsDisabled(true)
+    else if (emailDirty) setIsDisabled(true)
+    else if (phone === undefined) setIsDisabled(true)
+    else if (phoneDirty) setIsDisabled(true)
+    else if (city === '') setIsDisabled(true)
+    else if (country === '') setIsDisabled(true)
+    else if (!checked) setIsDisabled(true)
+    else {
+      setIsDisabled(false)
+    }
+  }, [
+    name,
+    secondName,
+    email,
+    emailDirty,
+    city,
+    country,
+    phoneDirty,
+    checked,
+    phone,
+  ])
   // Modal useState end
   const checkFavourite = (item, key) => {
     const index = getFavourite?.map((i, k) => i.id)
@@ -77,6 +105,7 @@ const Cart = () => {
       else dispatch(setFavourite(item))
     } else dispatch(setFavourite(item))
   }
+
   const [itemId, setItemId] = useState(-1)
 
   const cost = getCartData?.reduce(
@@ -169,7 +198,6 @@ const Cart = () => {
                   <label
                     htmlFor="phone"
                     style={{
-                      borderColor: phoneDirty ? '#E5271B' : '#808080',
                       color: phoneDirty ? '#E5271B' : '#808080',
                     }}
                   >
@@ -225,21 +253,11 @@ const Cart = () => {
                 {/* ---------- button ---------- */}
                 <button
                   className="modal-container__sendbtn"
-                  disabled={
-                    (name &&
-                      secondName &&
-                      email &&
-                      city &&
-                      country &&
-                      phone) === ' '
-                      ? true
-                      : emailDirty
-                      ? true
-                      : checked
-                      ? false
-                      : true
-                  }
-                  onClick={() => setSended(true)}
+                  disabled={isDisabled}
+                  onClick={() => {
+                    setSended(true)
+                    dispatch(unSetCartData([]))
+                  }}
                 >
                   Заказать
                 </button>
@@ -262,7 +280,9 @@ const Cart = () => {
                   >
                     <div
                       className="cart-container__cartitem"
-                      style={{ marginTop: index === 0 ? 0 : 8 }}
+                      style={{
+                        marginTop: index === 0 ? 0 : 8,
+                      }}
                     >
                       <img
                         src={item?.imgNcolors[item?.selectedColor]?.imgUrl}
@@ -360,33 +380,11 @@ const Cart = () => {
                 .filter((i, k) => k < 5)
                 .map((item, key) => (
                   <div className="hit-block__item" key={item.id}>
-                    <div className="hit-block__imgblock">
-                      <Carousel
-                        fade
-                        keyboard={false}
-                        controls={false}
-                        interval={key === itemId ? 1000 : null}
-                        pause={false}
-                        indicators={key === itemId}
-                      >
-                        {item.imgNcolors.map((img, index) => (
-                          <Carousel.Item
-                            className="hit-block__swiper"
-                            onMouseOver={() => setItemId(key)}
-                            onMouseLeave={() => setItemId(-1)}
-                            onClick={() => dispatch(setDetailData(item))}
-                            key={img.id}
-                          >
-                            <Link to="/detailpage">
-                              <img
-                                onClick={() => dispatch(setDetailData(item))}
-                                src={img.imgUrl}
-                                alt="img"
-                              />
-                            </Link>
-                          </Carousel.Item>
-                        ))}
-                      </Carousel>
+                    <div className="hit-block__imgblock nth-five">
+                      <CustomSlider
+                        detailData={item}
+                        sliderImage={item.imgNcolors}
+                      />
 
                       <img
                         style={{ cursor: 'pointer' }}

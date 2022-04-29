@@ -20,7 +20,7 @@ const Collections = () => {
     <section className="collections-container">
       {getCollectionsData.length !== 0 && (
         <>
-          <h5>Коллекция</h5>
+          <h4 style={{ alignSelf: 'center' }}>Коллекция</h4>
 
           <div className="collections-block">
             {getCollectionsData

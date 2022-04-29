@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Carousel from 'react-bootstrap/Carousel'
+import CustomSlider from '../../Components/Slider'
 import { Link } from 'react-router-dom'
 
 import { setDetailData, setFavourite, unSetFavourite } from '../../Store/action'
-import { db } from '../../config/fbConfig'
-import LoadingSpinner from '../../Components/Spinner'
 import './_hits.scss'
 
 const Fresh = () => {
@@ -37,31 +35,10 @@ const Fresh = () => {
               .map((item, key) => (
                 <div className="hit-block__item" key={item.id}>
                   <div className="hit-block__imgblock">
-                    <Carousel
-                      fade
-                      keyboard={false}
-                      controls={false}
-                      interval={key === itemId ? 1000 : null}
-                      pause={false}
-                      indicators={key === itemId}
-                    >
-                      {item.imgNcolors.map((img, index) => (
-                        <Carousel.Item
-                          onMouseOver={() => setItemId(key)}
-                          onMouseLeave={() => setItemId(-1)}
-                          className="hit-block__swiper"
-                          key={img.id}
-                        >
-                          <Link to="detailpage">
-                            <img
-                              onClick={() => dispatch(setDetailData(item))}
-                              src={img.imgUrl}
-                              alt="img"
-                            />
-                          </Link>
-                        </Carousel.Item>
-                      ))}
-                    </Carousel>
+                    <CustomSlider
+                      detailData={item}
+                      sliderImage={item.imgNcolors}
+                    />
 
                     <img
                       style={{ cursor: 'pointer' }}

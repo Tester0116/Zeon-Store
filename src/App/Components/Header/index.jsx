@@ -18,20 +18,26 @@ const Header = ({ breadCrums }) => {
   const [focused, setFocused] = useState(false)
 
   const __ItemHandler = (i) => {
-    if (searchResult.length !== 0 && searchValue.length !== 0) {
-      dispatch(setSearchData(searchResult))
+    if (searchValue.length !== 0) {
+      searchResult[0]['searchText'] = searchValue
+      dispatch(setSearchData(searchResult[0]))
       navigate('/searchpage')
     } else setSearchValue(i.target.innerText)
   }
 
   const __SearchbtnHandler = () => {
-    if (searchValue.length !== 0 && searchResult.length === 0) {
-      alert('Этот товар не в наличии. Выберите другой')
-      setSearchValue('')
-    }
-    if (searchResult.length === 0 || searchValue.length === 0) setFocused(true)
-    else {
+    if (searchValue === '') setFocused(true)
+    else if (
+      !searchResult.find((person) =>
+        person.itemType.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    ) {
+      searchResult['searchText'] = searchValue
       dispatch(setSearchData(searchResult))
+      navigate('/searchpage')
+    } else {
+      searchResult[0]['searchText'] = searchValue
+      dispatch(setSearchData(searchResult[0]))
       navigate('/searchpage')
     }
   }
@@ -39,7 +45,8 @@ const Header = ({ breadCrums }) => {
   const breadCrumHandler = (crum) => {
     // crum.id !== 0 && navigate(-crum.id)
     if (crum.text === 'Коллекция') return navigate('/collections')
-    if (breadCrums.length === 3) {
+    if (crum.text === 'Коллекции') return navigate('/collections')
+    if (breadCrums.length === 3 && crum.id === 0) {
       dispatch(setCategoriesData(getCollectionsData[0]))
       navigate('/collections/categories')
       return
@@ -103,7 +110,10 @@ const Header = ({ breadCrums }) => {
               onBlur={() => setFocused(false)}
             />
             {focused && searchResult.length !== 0 && (
-              <div className="detail-block">
+              <div
+                className="detail-block"
+                onClick={(e) => e.stopPropagation()}
+              >
                 {searchResult
                   ?.sort((a, b) => b.id - a.id)
                   .map((i, k) => (

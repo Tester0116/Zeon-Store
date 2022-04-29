@@ -4,6 +4,7 @@ export const COLLECTIONS_DATA = 'COLLECTIONS_DATA'
 export const CATEGORIES_DATA = 'CATEGORIES_DATA'
 export const DETAILPAGE_DATA = 'DETAILPAGE_DATA'
 export const UNSET_FAVOURITE = 'UNSET_FAVOURITE'
+export const EMPTY_CART_DATA = 'EMPTY_CART_DATA'
 export const SET_FAVOURITE = 'SET_FAVOURITE'
 export const BENEFIT_DATA = 'BENEFIT_DATA'
 export const SUPPORT_DATA = 'SUPPORT_DATA'
@@ -40,6 +41,8 @@ export const decrementCartCounter = (payload) => ({
 })
 // ----------------------------
 export const unSetFavourite = (payload) => ({ type: UNSET_FAVOURITE, payload })
+// ----------------------------
+export const unSetCartData = (payload) => ({ type: EMPTY_CART_DATA, payload })
 // ----------------------------
 export const setDetailData = (payload) => ({ type: DETAILPAGE_DATA, payload })
 // ----------------------------
