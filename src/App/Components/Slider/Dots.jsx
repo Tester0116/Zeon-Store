@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Dots = ({ activeIndex, onclick, sliderImage }) => {
+const Dots = ({ activeIndex, onclick, sliderImage, nthFive }) => {
   return (
-    <div className="all-dots">
+    <div className={nthFive ? 'all-dots nth-five' : 'all-dots'}>
       {sliderImage.map((slide, index) => (
         <span
           key={index}

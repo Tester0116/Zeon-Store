@@ -28,6 +28,13 @@ const Categories = () => {
 
   // useEffect(() => getCategoriesData.length === 0 && navigate('/'), [])
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
+
   // ------ pagination ------
   const [currentPage, setCurrentPage] = useState(1)
   let PageSize = 12
@@ -45,8 +52,12 @@ const Categories = () => {
       else dispatch(setFavourite(item))
     } else dispatch(setFavourite(item))
   }
-  const [itemId, setItemId] = useState(-1)
-  //   --------------------------------------
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [currentPage])
   return (
     <section>
       <Header
@@ -90,7 +101,7 @@ const Categories = () => {
                           />
                           <span className="hit-block__discount-procent">
                             {Math.round(
-                              ((item.price - item.discount) / item.discount) *
+                              ((item.discount - item.price) / item.discount) *
                                 100
                             )}
                             %
@@ -150,6 +161,7 @@ const Categories = () => {
                           <CustomSlider
                             detailData={item}
                             sliderImage={item.imgNcolors}
+                            nthFive
                           />
 
                           <img
@@ -173,7 +185,7 @@ const Categories = () => {
                               />
                               <span className="hit-block__discount-procent">
                                 {Math.round(
-                                  ((item.price - item.discount) /
+                                  ((item.discount - item.price) /
                                     item.discount) *
                                     100
                                 )}

@@ -3,7 +3,7 @@ import SliderContent from './Content'
 import Dots from './Dots'
 import './_index.scss'
 
-const CustomSlider = ({ sliderImage, detailData }) => {
+const CustomSlider = ({ sliderImage, detailData, nthFive }) => {
   const len = sliderImage.length - 1
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -21,15 +21,8 @@ const CustomSlider = ({ sliderImage, detailData }) => {
         activeIndex={activeIndex}
         sliderImage={sliderImage}
       />
-      {/* <Arrows
-        prevSlide={() =>
-          setActiveIndex(activeIndex < 1 ? len : activeIndex - 1)
-        }
-        nextSlide={() =>
-          setActiveIndex(activeIndex === len ? 0 : activeIndex + 1)
-        }
-      /> */}
       <Dots
+        nthFive={nthFive}
         activeIndex={activeIndex}
         sliderImage={sliderImage}
         onclick={(activeIndex) => setActiveIndex(activeIndex)}

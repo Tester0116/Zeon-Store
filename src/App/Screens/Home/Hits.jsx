@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { setDetailData, setFavourite, unSetFavourite } from '../../Store/action'
 import LoadingSpinner from '../../Components/Spinner'
-import { db } from '../../config/fbConfig'
 
 import './_hits.scss'
 import CustomSlider from '../../Components/Slider'
@@ -24,9 +23,6 @@ const Hits = () => {
       else dispatch(setFavourite(item))
     } else dispatch(setFavourite(item))
   }
-  const [itemId, setItemId] = useState(-1)
-
-  const [first, setfirst] = useState(0)
 
   return (
     <div className="hit-container">
@@ -66,7 +62,7 @@ const Hits = () => {
                       />
                       <span className="hit-block__discount-procent">
                         {Math.round(
-                          ((item.price - item.discount) / item.discount) * 100
+                          ((item.discount - item.price) / item.discount) * 100
                         )}
                         %
                       </span>
@@ -106,11 +102,7 @@ const Hits = () => {
       )}
 
       <button
-        onClick={
-          // sendData
-          // () => console.log(getHitData)
-          () => sethitLimit(hitLimit + 4)
-        }
+        onClick={() => sethitLimit(hitLimit + 4)}
         className="hit-block__morebtn"
       >
         Еще

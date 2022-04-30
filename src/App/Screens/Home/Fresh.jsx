@@ -9,7 +9,7 @@ import './_hits.scss'
 const Fresh = () => {
   const [freshLimit, setFreshLimit] = useState(4)
   const dispatch = useDispatch()
-  const { getFavourite, getFreshData, getLoad } = useSelector(
+  const { getFavourite, getFreshData } = useSelector(
     (store) => store.appReducer
   )
 
@@ -21,7 +21,6 @@ const Fresh = () => {
       else dispatch(setFavourite(item))
     } else dispatch(setFavourite(item))
   }
-  const [itemId, setItemId] = useState(-1)
 
   return (
     <div className="hit-container">
@@ -59,7 +58,7 @@ const Fresh = () => {
                         />
                         <span className="hit-block__discount-procent">
                           {Math.round(
-                            ((item.price - item.discount) / item.discount) * 100
+                            ((item.discount - item.price) / item.discount) * 100
                           )}
                           %
                         </span>
@@ -98,11 +97,7 @@ const Fresh = () => {
           </div>
 
           <button
-            onClick={
-              // sendData
-              // () => console.log(getFreshData)
-              () => setFreshLimit(freshLimit + 4)
-            }
+            onClick={() => setFreshLimit(freshLimit + 4)}
             className="hit-block__morebtn"
           >
             Еще

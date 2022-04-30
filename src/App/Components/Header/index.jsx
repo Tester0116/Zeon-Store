@@ -43,7 +43,6 @@ const Header = ({ breadCrums }) => {
   }
 
   const breadCrumHandler = (crum) => {
-    // crum.id !== 0 && navigate(-crum.id)
     if (crum.text === 'Коллекция') return navigate('/collections')
     if (crum.text === 'Коллекции') return navigate('/collections')
     if (breadCrums.length === 3 && crum.id === 0) {

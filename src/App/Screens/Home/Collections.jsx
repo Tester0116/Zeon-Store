@@ -45,11 +45,7 @@ const Collections = () => {
               ))}
           </div>
           <button
-            onClick={
-              // sendData
-              // () => console.log(randomize)
-              () => setCollectionLimit(collectionLimit + 4)
-            }
+            onClick={() => setCollectionLimit(collectionLimit + 4)}
             className="hit-block__morebtn"
           >
             Еще

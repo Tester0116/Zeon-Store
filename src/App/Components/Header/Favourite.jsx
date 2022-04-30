@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import ru from 'react-phone-number-input/locale/ru.json'
 import { useDispatch, useSelector } from 'react-redux'
-import PhoneInput from 'react-phone-number-input'
 import { useNavigate, Link } from 'react-router-dom'
 
 import ScrollToTop from '../../Components/ScrollToTop'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import CustomSlider from '../Slider'
-import Counter from '../Counter'
 
-import {
-  delCartData,
-  unSetFavourite,
-  setFavourite,
-  setDetailData,
-} from '../../Store/action'
+import { unSetFavourite, setFavourite, setDetailData } from '../../Store/action'
 
 import './_cart.scss'
 
@@ -74,7 +65,7 @@ const Favourite = () => {
                         />
                         <span className="hit-block__discount-procent">
                           {Math.round(
-                            ((item.price - item.discount) / item.discount) * 100
+                            ((item.discount - item.price) / item.discount) * 100
                           )}
                           %
                         </span>
@@ -126,6 +117,7 @@ const Favourite = () => {
                       <CustomSlider
                         detailData={item}
                         sliderImage={item.imgNcolors}
+                        nthFive
                       />
 
                       <img
@@ -147,7 +139,7 @@ const Favourite = () => {
                           />
                           <span className="hit-block__discount-procent">
                             {Math.round(
-                              ((item.price - item.discount) / item.discount) *
+                              ((item.discount - item.price) / item.discount) *
                                 100
                             )}
                             %

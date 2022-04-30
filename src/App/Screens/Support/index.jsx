@@ -17,10 +17,9 @@ const Support = () => {
   const { getSupportData } = useSelector((state) => state.appReducer)
   useEffect(() => {
     // ----- Getting About Data -----
-    db.collection('Support').onSnapshot((snapshot) => {
+    db.collection('Support').onSnapshot((snapshot) =>
       dispatch(setSupportData(snapshot.docs.map((doc) => doc.data())))
-      console.log(snapshot.docs.map((doc) => doc.data()))
-    })
+    )
   }, [])
 
   const [isActive, setIsActive] = useState(1)

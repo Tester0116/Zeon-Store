@@ -1,10 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import CustomPagination from '../../Components/Pagination'
 import ScrollToTop from '../../Components/ScrollToTop'
-import LoadingSpinner from '../../Components/Spinner'
 import CustomSlider from '../../Components/Slider'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
@@ -22,7 +21,6 @@ const SearchPage = () => {
     (store) => store.appReducer
   )
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   // useEffect(() => {
   //   if (getSearchData.length === 0)  navigate('/', { replace: true })
@@ -46,8 +44,22 @@ const SearchPage = () => {
       else dispatch(setFavourite(item))
     } else dispatch(setFavourite(item))
   }
-  const [itemId, setItemId] = useState(-1)
   //   --------------------------------------
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
+  // -----------------
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [currentPage])
+
   return (
     <section>
       <Header breadCrums={[{ id: 0, text: 'Результаты поиска' }]} />
@@ -86,7 +98,7 @@ const SearchPage = () => {
                           />
                           <span className="hit-block__discount-procent">
                             {Math.round(
-                              ((item.price - item.discount) / item.discount) *
+                              ((item.discount - item.price) / item.discount) *
                                 100
                             )}
                             %
@@ -153,6 +165,7 @@ const SearchPage = () => {
                           <CustomSlider
                             detailData={item}
                             sliderImage={item.imgNcolors}
+                            nthFive
                           />
 
                           <img
@@ -176,7 +189,7 @@ const SearchPage = () => {
                               />
                               <span className="hit-block__discount-procent">
                                 {Math.round(
-                                  ((item.price - item.discount) /
+                                  ((item.discount - item.price) /
                                     item.discount) *
                                     100
                                 )}

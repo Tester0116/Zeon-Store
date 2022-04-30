@@ -109,7 +109,7 @@ const Cart = () => {
   const [itemId, setItemId] = useState(-1)
 
   const cost = getCartData?.reduce(
-    (i, k) => i + Number(k.discount * k.counter),
+    (i, k) => i + (k.discount !== undefined && Number(k.discount * k.counter)),
     0
   )
   const totalDiscount = getCartData?.reduce(
@@ -306,7 +306,9 @@ const Cart = () => {
                         {/* --- */}
                         <div className="fdrow">
                           <span>{item.price}</span>
-                          {item.discount && <span>{item.discount} p</span>}
+                          {item.discount && (
+                            <span className="discount">{item.discount} p</span>
+                          )}
                         </div>
                         {/* --- */}
                         <Counter index={item.id} count={item?.counter} />
@@ -384,6 +386,7 @@ const Cart = () => {
                       <CustomSlider
                         detailData={item}
                         sliderImage={item.imgNcolors}
+                        nthFive
                       />
 
                       <img
@@ -405,7 +408,7 @@ const Cart = () => {
                           />
                           <span className="hit-block__discount-procent">
                             {Math.round(
-                              ((item.price - item.discount) / item.discount) *
+                              ((item.discount - item.price) / item.discount) *
                                 100
                             )}
                             %

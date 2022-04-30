@@ -230,10 +230,11 @@ const DetailPage = (props) => {
               .filter((i, k) => k <= 4)
               .map((item, key) => (
                 <div className="hit-block__item" key={item.id}>
-                  <div className="hit-block__imgblock">
+                  <div className="hit-block__imgblock nth-five">
                     <CustomSlider
                       detailData={item}
                       sliderImage={item.imgNcolors}
+                      nthFive
                     />
 
                     <img
@@ -255,7 +256,7 @@ const DetailPage = (props) => {
                         />
                         <span className="hit-block__discount-procent">
                           {Math.round(
-                            ((item.price - item.discount) / item.discount) * 100
+                            ((item.discount - item.price) / item.discount) * 100
                           )}
                           %
                         </span>
