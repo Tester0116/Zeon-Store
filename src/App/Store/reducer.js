@@ -85,7 +85,10 @@ export default function appReducer(state = initialState, action) {
     case DELCART_DATA:
       return {
         ...state,
-        getCartData: state.getCartData.filter((fav) => fav.id !== payload.id),
+        getCartData: state.getCartData.filter(
+          (fav) =>
+            fav.id !== payload.id && fav.selectedColor !== payload.selectedColor
+        ),
       }
     // ------------------
     case EMPTY_CART_DATA:

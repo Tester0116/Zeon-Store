@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -11,6 +11,17 @@ const Collections = () => {
 
   const { getCollectionsData } = useSelector((state) => state.appReducer)
   const dispatch = useDispatch()
+
+  const ScrollHandler = (e) =>
+    e.target.documentElement.scrollTop < 100 && setCollectionLimit(4)
+
+  useEffect(() => {
+    document.addEventListener('scroll', ScrollHandler)
+
+    return () => {
+      document.removeEventListener('scroll', ScrollHandler)
+    }
+  }, [])
 
   const [collectionLimit, setCollectionLimit] = useState(4)
 
@@ -44,12 +55,14 @@ const Collections = () => {
                 </div>
               ))}
           </div>
-          <button
-            onClick={() => setCollectionLimit(collectionLimit + 4)}
-            className="hit-block__morebtn"
-          >
-            Еще
-          </button>
+          {collectionLimit <= getCollectionsData.length && (
+            <button
+              onClick={() => setCollectionLimit(collectionLimit + 4)}
+              className="hit-block__morebtn"
+            >
+              Еще
+            </button>
+          )}
           <span />
         </>
       )}

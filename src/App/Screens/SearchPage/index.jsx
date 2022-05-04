@@ -60,18 +60,19 @@ const SearchPage = () => {
     })
   }, [currentPage])
 
+
   return (
     <section>
       <Header breadCrums={[{ id: 0, text: 'Результаты поиска' }]} />
 
       <div className="container">
-        {getSearchData !== undefined && getSearchData.allData?.length !== 0 ? (
+        {getSearchData !== undefined && getSearchData?.length !== 0 ? (
           <>
             <div className="search-container">
               <h5>Результаты поиска по запросу: {getSearchData.searchText}</h5>
               {/* ----------------------------------------------- */}
               <div className="collections-container__paginationblock">
-                {currentSearchData.map((item, key) => (
+                {currentSearchData?.map((item, key) => (
                   <div className="hit-block__item" key={key}>
                     <div className="hit-block__imgblock">
                       <CustomSlider
@@ -140,7 +141,7 @@ const SearchPage = () => {
               <CustomPagination
                 className="pagination-bar"
                 currentPage={currentPage}
-                totalCount={getSearchData?.allData.length}
+                totalCount={getSearchData?.allData?.length}
                 pageSize={PageSize}
                 onPageChange={(page) => setCurrentPage(page)}
               />
@@ -158,7 +159,7 @@ const SearchPage = () => {
                 <h5>Возможно Вас заинтересует</h5>
                 <div className="hit-block hit-block__categories">
                   {getFreshData
-                    .filter((i, k) => k + 1 <= 5)
+                    ?.filter((i, k) => k + 1 <= 5)
                     .map((item, key) => (
                       <div className="hit-block__item" key={item.id}>
                         <div className="hit-block__imgblock  nth-five">

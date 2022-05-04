@@ -31,7 +31,10 @@ const Hits = () => {
       {getLoad ? (
         <LoadingSpinner />
       ) : (
-        <div className="hit-block">
+        <div
+          className="hit-block"
+          style={{ width: window.innerWidth < 630 ? '850%' : undefined }}
+        >
           {getHitData
             .filter((i, k) => k + 1 <= hitLimit)
             .map((item, key) => (
@@ -100,13 +103,14 @@ const Hits = () => {
             ))}
         </div>
       )}
-
-      <button
-        onClick={() => sethitLimit(hitLimit + 4)}
-        className="hit-block__morebtn"
-      >
-        Еще
-      </button>
+      {hitLimit <= getHitData.length && (
+        <button
+          onClick={() => sethitLimit(hitLimit + 4)}
+          className="hit-block__morebtn"
+        >
+          Еще
+        </button>
+      )}
     </div>
   )
 }

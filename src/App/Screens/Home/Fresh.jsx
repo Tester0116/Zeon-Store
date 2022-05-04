@@ -95,13 +95,14 @@ const Fresh = () => {
                 </div>
               ))}
           </div>
-
-          <button
-            onClick={() => setFreshLimit(freshLimit + 4)}
-            className="hit-block__morebtn"
-          >
-            Еще
-          </button>
+          {freshLimit <= getFreshData.length && (
+            <button
+              onClick={() => setFreshLimit(freshLimit + 4)}
+              className="hit-block__morebtn"
+            >
+              Еще
+            </button>
+          )}
         </>
       )}
     </div>

@@ -16,7 +16,7 @@ import {
 
 import './_index.scss'
 
-const DetailPage = (props) => {
+const DetailPage = () => {
   const { getFavourite, getDetailData, getCartData, getCollectionsData } =
     useSelector((store) => store.appReducer)
   const dispatch = useDispatch()
@@ -26,9 +26,15 @@ const DetailPage = (props) => {
     if (getDetailData.length === 0) navigate('/', { replace: true })
   }, [])
 
-  const [itemId, setItemId] = useState(-1)
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [getDetailData])
+
   const [colorOver, setColorOver] = useState(-1)
-  const [colorClicked, setColorClicked] = useState(0)
+  const [colorClicked, setColorClicked] = useState({ id: 0 })
 
   const breadCrums = [
     { id: 2, text: 'Коллекция' },
@@ -38,13 +44,19 @@ const DetailPage = (props) => {
 
   const AddCart = () => {
     const index = getCartData?.map((i, k) => i.id)
+    const color = getCartData?.map((i, k) => i.selectedColor)
 
-    getDetailData['selectedColor'] = colorClicked
+    getDetailData['selectedColor'] = colorClicked.id
     getDetailData['counter'] = 1
     if (Boolean(getCartData.length !== 0)) {
-      if (Boolean(index.includes(getDetailData.id))) navigate('/cart')
+      if (
+        index.includes(getDetailData.id)
+        // &&
+        // color.includes(getDetailData.selectedColor)
+      )
+        // console.log('second', getCartData)
+        navigate('/cart')
       else dispatch(setCartData(getDetailData))
-      // dispatch(setCartData([...getDetailData, colorClicked]))
     } else dispatch(setCartData(getDetailData))
   }
   const AddFavourite = () => {
@@ -115,7 +127,7 @@ const DetailPage = (props) => {
                   {getDetailData.imgNcolors.map((i, k) => (
                     <div
                       className={
-                        colorClicked === i.id
+                        colorClicked.id === i.id
                           ? 'detail-container__coloritems hovered'
                           : colorOver === i.id
                           ? 'detail-container__coloritems hovered'
@@ -123,7 +135,7 @@ const DetailPage = (props) => {
                       }
                       onMouseOver={() => setColorOver(i.id)}
                       onMouseOut={() => setColorOver(-1)}
-                      onClick={() => setColorClicked(i.id)}
+                      onClick={() => setColorClicked(i)}
                       key={i.id}
                     >
                       <div style={{ backgroundColor: i.color }} />

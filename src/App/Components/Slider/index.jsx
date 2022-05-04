@@ -17,12 +17,13 @@ const CustomSlider = ({ sliderImage, detailData, nthFive }) => {
   return (
     <div className="slider-container">
       <SliderContent
-        detailData={detailData}
         activeIndex={activeIndex}
+        detailData={detailData}
         sliderImage={sliderImage}
       />
       <Dots
         nthFive={nthFive}
+        detailData={detailData}
         activeIndex={activeIndex}
         sliderImage={sliderImage}
         onclick={(activeIndex) => setActiveIndex(activeIndex)}

@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { setDetailData } from '../../Store/action'
 
 const SliderContent = ({ activeIndex, sliderImage, detailData }) => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   return (
     <section>

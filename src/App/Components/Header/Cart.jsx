@@ -283,12 +283,19 @@ const Cart = () => {
                       style={{
                         marginTop: index === 0 ? 0 : 8,
                       }}
+                      onClick={() => {
+                        dispatch(setDetailData(item))
+                        navigate('/detailpage')
+                      }}
                     >
                       <img
                         src={item?.imgNcolors[item?.selectedColor]?.imgUrl}
                         alt="Cart img"
                       />
-                      <div className="cart-container__counterblock">
+                      <div
+                        className="cart-container__counterblock"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <span>{item.title}</span>
                         <span>Размер: {item.size}</span>
                         {/* --- */}
@@ -315,7 +322,10 @@ const Cart = () => {
                       </div>
                       <img
                         className="pointer"
-                        onClick={() => dispatch(delCartData(item))}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          dispatch(delCartData(item))
+                        }}
                         src={require('../../assets/close-icon.png')}
                         alt="close icon"
                       />
