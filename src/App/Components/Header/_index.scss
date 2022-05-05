@@ -143,6 +143,7 @@
   margin-top: -3px;
   padding: 21px 100px;
   background-color: white;
+
   & > span {
     cursor: pointer;
     color: #393939;
@@ -286,14 +287,13 @@
     }
   }
   &__content {
-    display: inline-block;
     padding: 16px;
     background-color: white;
     width: 80%;
     height: 100%;
     z-index: 199;
     transition: all 2s;
-
+    position: relative;
     // list block
     & > ul {
       margin-top: 20px;
@@ -321,6 +321,47 @@
         color: #393939;
       }
     }
+    & > .menu__bottom {
+      position: absolute;
+      bottom: 24px;
+      // текст - "Свяжитсь с нами"
+      & > b {
+        font: 500 15px 'Montserrat';
+        line-height: 18px;
+        color: #393939;
+      }
+
+      // block tel
+      & > :nth-child(2) {
+        // text "Тел"
+        & > :first-child {
+          font: 400 15px 'Montserrat';
+          line-height: 18px;
+          color: #979797;
+        }
+        // phone number
+        & > :last-child {
+          font: 400 15px 'Montserrat';
+          line-height: 18px;
+          color: #393939;
+          margin-left: 6px;
+        }
+      }
+      // block links
+      & > :nth-child(3) {
+        margin-top: 8px;
+        // a - links blocks
+        & > a {
+          margin-right: 6px;
+        }
+        // images in a
+        & > a > img {
+          width: 36px;
+          height: 36px;
+          object-fit: cover;
+        }
+      }
+    }
   }
 
   .blur {
@@ -342,6 +383,9 @@
   }
   .parent-block {
     height: 64px;
+  }
+  .breadcrumb-block {
+    padding: 21px 16px;
   }
 }
 

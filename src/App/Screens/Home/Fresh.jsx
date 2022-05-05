@@ -40,7 +40,7 @@ const Fresh = () => {
                     />
 
                     <img
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: 'pointer', zIndex: 98 }}
                       onClick={() => checkFavourite(item, key)}
                       src={
                         getFavourite?.map((i, k) => i.id).includes(item.id)

@@ -33,7 +33,7 @@ const Hits = () => {
       ) : (
         <div
           className="hit-block"
-          style={{ width: window.innerWidth < 630 ? '850%' : undefined }}
+          style={{ width: window.innerWidth < 630 ? '700%' : undefined }}
         >
           {getHitData
             .filter((i, k) => k + 1 <= hitLimit)
@@ -47,7 +47,7 @@ const Hits = () => {
                   />
                   {/*  */}
                   <img
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer', zIndex: 98 }}
                     onClick={() => checkFavourite(item, key)}
                     src={
                       getFavourite?.map((i, k) => i.id).includes(item.id)

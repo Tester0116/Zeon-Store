@@ -50,9 +50,9 @@ export const setBenefitData = (payload) => ({ type: BENEFIT_DATA, payload })
 // ----------------------------
 export const setSupportData = (payload) => ({ type: SUPPORT_DATA, payload })
 // ----------------------------
-export const setSearchData = (payload) => ({ type: SEARCH_DATA, payload })
-// ----------------------------
 export const setFavourite = (payload) => ({ type: SET_FAVOURITE, payload })
+// ----------------------------
+export const setSearchData = (payload) => ({ type: SEARCH_DATA, payload })
 // ----------------------------
 export const setHomeBanner = (payload) => ({ type: HOME_BANNER, payload })
 // ----------------------------

@@ -20,6 +20,10 @@ const Support = () => {
     db.collection('Support').onSnapshot((snapshot) =>
       dispatch(setSupportData(snapshot.docs.map((doc) => doc.data())))
     )
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }, [])
 
   const [isActive, setIsActive] = useState(1)

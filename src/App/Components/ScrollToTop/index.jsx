@@ -3,10 +3,9 @@ import InputMask from 'react-input-mask'
 
 import './_index.scss'
 
-const ScrollToTop = () => {
+const ScrollToTop = ({ ModalVisible, setModalVisible }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [SmsModalVisible, setSmsModalVisible] = useState(false)
-  const [ModalVisible, setModalVisible] = useState(false)
   // ---------------------------------------------------
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -67,14 +66,14 @@ const ScrollToTop = () => {
                   alt="thank icon"
                 />
                 <h5>Спасибо!</h5>
-                <span>
-                  Ваша заявка была принята ожидайте, скоро Вам перезвонят
-                </span>
+                <span>Ваша заявка была принята ожидайте,</span>
+                <p> скоро Вам перезвонят</p>
               </div>
             ) : (
               <>
                 <h5>Если у Вас остались вопросы</h5>
-                <span>Оставьте заявку и мы обязательно Вам перезвоним</span>
+                <span>Оставьте заявку и мы обязательно</span>
+                <p>Вам перезвоним</p>
                 <img
                   alt="close icon"
                   onClick={() => setModalVisible(false)}

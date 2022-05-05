@@ -65,3 +65,34 @@
     }
   }
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .collections-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 50px;
+    // overflow: scroll;
+    width: 350%;
+    &__item {
+      width: 100%;
+    }
+    &__categories {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+    &__morebtn {
+      display: none;
+    }
+    gap: 8px;
+  }
+  .collections-container {
+    overflow: scroll;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}

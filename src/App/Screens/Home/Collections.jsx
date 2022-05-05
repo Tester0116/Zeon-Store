@@ -25,8 +25,6 @@ const Collections = () => {
 
   const [collectionLimit, setCollectionLimit] = useState(4)
 
-  const sendData = () => {}
-
   return (
     <section className="collections-container">
       {getCollectionsData.length !== 0 && (

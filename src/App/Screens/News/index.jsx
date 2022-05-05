@@ -28,6 +28,8 @@ const News = () => {
   //
   const [newsLimit, setNewsLimit] = useState(8)
 
+  const [activeIndex, setActiveIndex] = useState(1)
+
   const ScrollHandler = (e) => {
     if (
       e.target.documentElement.scrollHeight -
@@ -71,8 +73,30 @@ const News = () => {
                       <img src={item.imgUrl} alt="news img" />
                       <div className="fdcol">
                         <span>{item.title}</span>
-                        <p>{item.discription}</p>
+                        <div
+                          className={
+                            activeIndex === key
+                              ? 'discription-block active'
+                              : 'discription-block'
+                          }
+                        >
+                          <p>{item.discription}</p>
+                        </div>
                       </div>
+                      <button
+                        style={{
+                          display:
+                            window.innerWidth > 600
+                              ? 'none'
+                              : activeIndex === key
+                              ? 'none'
+                              : 'block',
+                        }}
+                        type="button"
+                        onClick={() => setActiveIndex(key)}
+                      >
+                        Читать полностью
+                      </button>
                     </div>
                   </CSSTransition>
                 ))}

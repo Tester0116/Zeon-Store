@@ -6,7 +6,7 @@ import { setCategoriesData, setSearchData } from '../../Store/action'
 import Menu from './Menu'
 import './_index.scss'
 
-const Header = ({ breadCrums }) => {
+const Header = ({ breadCrums, active, setActive }) => {
   const { getFavourite, getCartData, getCollectionsData } = useSelector(
     (store) => store.appReducer
   )
@@ -257,7 +257,11 @@ const Header = ({ breadCrums }) => {
           </a>
         </div>
       </div>
-      <Menu active={menuActive} setActive={setMenuActive} />
+      <Menu
+        active={menuActive}
+        setActive={setMenuActive}
+        setModal={setActive}
+      />
       {/* -------------------------- */}
 
       {/* ---------- Line ---------- */}

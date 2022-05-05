@@ -17,7 +17,7 @@
     outline: none;
   }
   &__block {
-    width: 440px;
+    width: auto;
     height: auto;
     background-color: white;
     padding: 32px 24px;
@@ -344,4 +344,11 @@
 .cart-item-exit-active {
   opacity: 0;
   transition: opacity 500ms ease-in;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .cart-container {
+    flex-direction: column;
+  }
 }

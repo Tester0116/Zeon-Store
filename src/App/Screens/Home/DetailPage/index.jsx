@@ -34,7 +34,10 @@ const DetailPage = () => {
   }, [getDetailData])
 
   const [colorOver, setColorOver] = useState(-1)
-  const [colorClicked, setColorClicked] = useState({ id: 0 })
+  const [colorClicked, setColorClicked] = useState(
+    getDetailData?.imgNcolors[0]?.color
+  )
+  const [imgUrl, setImgUrl] = useState(getDetailData?.imgNcolors[0]?.imgUrl)
 
   const breadCrums = [
     { id: 2, text: 'Коллекция' },
@@ -43,22 +46,24 @@ const DetailPage = () => {
   ]
 
   const AddCart = () => {
-    const index = getCartData?.map((i, k) => i.id)
-    const color = getCartData?.map((i, k) => i.selectedColor)
-
-    getDetailData['selectedColor'] = colorClicked.id
-    getDetailData['counter'] = 1
-    if (Boolean(getCartData.length !== 0)) {
+    const body = {
+      ...getDetailData,
+      selectedColor: colorClicked,
+      counter: 1,
+      selectedImg: imgUrl,
+    }
+    if (getCartData.length !== 0) {
+      //   // ----------
       if (
-        index.includes(getDetailData.id)
-        // &&
-        // color.includes(getDetailData.selectedColor)
+        getCartData?.find((i, k) => i.id === getDetailData.id) &&
+        getCartData?.find((i, k) => i.selectedColor === colorClicked)
       )
-        // console.log('second', getCartData)
         navigate('/cart')
-      else dispatch(setCartData(getDetailData))
-    } else dispatch(setCartData(getDetailData))
+      else dispatch(setCartData(body))
+      //   // ----------
+    } else dispatch(setCartData(body))
   }
+  // -----------------------------------------
   const AddFavourite = () => {
     const index = getFavourite?.map((i, k) => i.id)
 
@@ -84,12 +89,11 @@ const DetailPage = () => {
         <div className="container">
           {/* -------------------------- */}
           <div className="detail-container">
-            <div className="detail-container__imgblock">
-              <div className="detail-container__firstimg">
-                {getDetailData.imgNcolors.slice(0, 4).map((i, k) => (
+            {window.innerWidth < 600 ? (
+              <div className="detail-container__mini-imgblock">
+                {getDetailData.imgNcolors.map((i, k) => (
                   <img
-                    className={colorOver === i.id ? 'hovered' : undefined}
-                    onMouseOver={() => setColorOver(i.id)}
+                    onMouseOver={() => setColorOver(i.id - 1)}
                     onMouseOut={() => setColorOver(-1)}
                     src={i.imgUrl}
                     alt="detail img"
@@ -97,10 +101,10 @@ const DetailPage = () => {
                   />
                 ))}
               </div>
-              <div className="detail-container__secondimg">
-                {getDetailData.imgNcolors
-                  .slice(4, getDetailData.imgNcolors.length)
-                  .map((i, k) => (
+            ) : (
+              <div className="detail-container__imgblock">
+                <div className="detail-container__firstimg">
+                  {getDetailData.imgNcolors.slice(0, 4).map((i, k) => (
                     <img
                       className={colorOver === i.id ? 'hovered' : undefined}
                       onMouseOver={() => setColorOver(i.id)}
@@ -110,8 +114,23 @@ const DetailPage = () => {
                       key={i.id}
                     />
                   ))}
+                </div>
+                <div className="detail-container__secondimg">
+                  {getDetailData.imgNcolors
+                    .slice(4, getDetailData.imgNcolors.length)
+                    .map((i, k) => (
+                      <img
+                        className={colorOver === i.id ? 'hovered' : undefined}
+                        onMouseOver={() => setColorOver(i.id)}
+                        onMouseOut={() => setColorOver(-1)}
+                        src={i.imgUrl}
+                        alt="detail img"
+                        key={i.id}
+                      />
+                    ))}
+                </div>
               </div>
-            </div>
+            )}
             {/* ------------------------------------- */}
             <div className="detail-container__aboutblock">
               <h4>{getDetailData.title}</h4>
@@ -127,7 +146,7 @@ const DetailPage = () => {
                   {getDetailData.imgNcolors.map((i, k) => (
                     <div
                       className={
-                        colorClicked.id === i.id
+                        colorClicked === i.color
                           ? 'detail-container__coloritems hovered'
                           : colorOver === i.id
                           ? 'detail-container__coloritems hovered'
@@ -135,7 +154,10 @@ const DetailPage = () => {
                       }
                       onMouseOver={() => setColorOver(i.id)}
                       onMouseOut={() => setColorOver(-1)}
-                      onClick={() => setColorClicked(i)}
+                      onClick={() => {
+                        setColorClicked(i.color)
+                        setImgUrl(i.imgUrl)
+                      }}
                       key={i.id}
                     >
                       <div style={{ backgroundColor: i.color }} />
@@ -201,10 +223,11 @@ const DetailPage = () => {
               {/* --------------- */}
               <div className="fdrow detail-container__addCartblock">
                 <button onClick={() => AddCart()}>
-                  {getCartData
-                    ?.map((i, k) => i.id)
-                    .includes(getDetailData.id) ? (
-                    <span>Перейти в корзине</span>
+                  {getCartData?.find((i, k) => i.id === getDetailData.id) &&
+                  getCartData?.find(
+                    (i, k) => i.selectedColor === colorClicked
+                  ) ? (
+                    <span onClick={() => AddCart()}>Перейти в корзине</span>
                   ) : (
                     <>
                       <img
@@ -235,75 +258,78 @@ const DetailPage = () => {
 
           {/* -------------------------- */}
           <h5 style={{ marginTop: 52 }}>Похожие товары</h5>
-          <div className="hit-block hit-block__categories">
-            {getCollectionsData[0]?.allData
-              .filter((i, k) => i.title === getDetailData.title)
-              .filter((i, k) => i.id !== getDetailData.id)
-              .filter((i, k) => k <= 4)
-              .map((item, key) => (
-                <div className="hit-block__item" key={item.id}>
-                  <div className="hit-block__imgblock nth-five">
-                    <CustomSlider
-                      detailData={item}
-                      sliderImage={item.imgNcolors}
-                      nthFive
-                    />
+          <div className="categories-container">
+            <div className="hit-block hit-block__categories">
+              {getCollectionsData[0]?.allData
+                .filter((i, k) => i.title === getDetailData.title)
+                .filter((i, k) => i.id !== getDetailData.id)
+                .filter((i, k) => k <= 4)
+                .map((item, key) => (
+                  <div className="hit-block__item" key={item.id}>
+                    <div className="hit-block__imgblock nth-five">
+                      <CustomSlider
+                        detailData={item}
+                        sliderImage={item.imgNcolors}
+                        nthFive
+                      />
 
-                    <img
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => checkFavourite(item, key)}
-                      src={
-                        getFavourite?.map((i, k) => i.id).includes(item.id)
-                          ? require('../../../assets/filled-heart.png')
-                          : require('../../../assets/unfill-heart.png')
-                      }
-                      alt="heart-icon"
-                    />
-                    {item.discount && (
-                      <>
-                        <img
-                          className="hit-block__discount-img"
-                          src={require('../../../assets/discount-icon.png')}
-                          alt="block__discount"
-                        />
-                        <span className="hit-block__discount-procent">
-                          {Math.round(
-                            ((item.discount - item.price) / item.discount) * 100
-                          )}
-                          %
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  {/* ---- end img block ----- */}
-                  <Link to="/detailpage">
-                    <div
-                      onClick={() => dispatch(setDetailData(item))}
-                      className="hit-block__textdiv"
-                    >
-                      <span>{item.title}</span>
-                      <div>
-                        <span>{item.price} p</span>
-                        {item.discount && (
-                          <span className="hit-block__discount">
-                            {item.discount} p
-                          </span>
-                        )}
-                      </div>
-                      <span>Размер: {item.size}</span>
-                      <div className="hit-block__colorsblock">
-                        {item.imgNcolors.map((color, k) => (
-                          <div
-                            key={k}
-                            className="hit-block__color"
-                            style={{ backgroundColor: color.color }}
+                      <img
+                        style={{ cursor: 'pointer', zIndex: 500 }}
+                        onClick={() => checkFavourite(item, key)}
+                        src={
+                          getFavourite?.map((i, k) => i.id).includes(item.id)
+                            ? require('../../../assets/filled-heart.png')
+                            : require('../../../assets/unfill-heart.png')
+                        }
+                        alt="heart-icon"
+                      />
+                      {item.discount && (
+                        <>
+                          <img
+                            className="hit-block__discount-img"
+                            src={require('../../../assets/discount-icon.png')}
+                            alt="block__discount"
                           />
-                        ))}
-                      </div>
+                          <span className="hit-block__discount-procent">
+                            {Math.round(
+                              ((item.discount - item.price) / item.discount) *
+                                100
+                            )}
+                            %
+                          </span>
+                        </>
+                      )}
                     </div>
-                  </Link>
-                </div>
-              ))}
+                    {/* ---- end img block ----- */}
+                    <Link to="/detailpage">
+                      <div
+                        onClick={() => dispatch(setDetailData(item))}
+                        className="hit-block__textdiv"
+                      >
+                        <span>{item.title}</span>
+                        <div>
+                          <span>{item.price} p</span>
+                          {item.discount && (
+                            <span className="hit-block__discount">
+                              {item.discount} p
+                            </span>
+                          )}
+                        </div>
+                        <span>Размер: {item.size}</span>
+                        <div className="hit-block__colorsblock">
+                          {item.imgNcolors.map((color, k) => (
+                            <div
+                              key={k}
+                              className="hit-block__color"
+                              style={{ backgroundColor: color.color }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+            </div>
           </div>
           {/* -------------------------- */}
         </div>

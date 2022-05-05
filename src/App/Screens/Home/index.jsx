@@ -14,7 +14,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import './_hits.scss'
 
-const HomeIndex = () => {
+const HomeIndex = ({ active, setActive }) => {
   const { getHomeBanner, getBenefitData } = useSelector(
     (state) => state.appReducer
   )
@@ -64,7 +64,7 @@ const HomeIndex = () => {
 
       <div className="container">
         {/* ------------ */}
-        <ScrollToTop />
+        <ScrollToTop ModalVisible={active} setModalVisible={setActive} />
         {/* ------------ */}
         <Hits />
         {/* ------------ */}

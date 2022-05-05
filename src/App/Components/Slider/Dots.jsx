@@ -15,6 +15,7 @@ const Dots = ({ activeIndex, onclick, sliderImage, nthFive, detailData }) => {
           key={index}
           className={`${activeIndex === index ? 'dot active-dot' : 'dot'}`}
           onClick={() => {
+            detailData['selectedColor'] = detailData?.imgNcolors[0]?.color
             dispatch(setDetailData(detailData))
             navigate('/detailpage')
           }}

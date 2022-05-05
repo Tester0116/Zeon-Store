@@ -20,6 +20,10 @@ const About = () => {
     db.collection('About').onSnapshot((snapshot) =>
       dispatch(setAbout(snapshot.docs.map((doc) => doc.data())))
     )
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
   }, [])
 
   return (

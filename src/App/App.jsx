@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import Footer from './Components/Footer'
@@ -20,6 +20,8 @@ import '../_App.scss'
 
 const App = () => {
   const dispatch = useDispatch()
+
+  const [supportModal, setSupportModal] = useState(false)
 
   useEffect(() => {
     // ----- Getting Collections Data -----
@@ -60,9 +62,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />
+      <Header active={supportModal} setActive={setSupportModal} />
       <main>
-        <Home />
+        <Home active={supportModal} setActive={setSupportModal} />
       </main>
       <Footer />
     </div>

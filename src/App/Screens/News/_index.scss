@@ -33,5 +33,40 @@
       line-height: 165%;
       color: #5b5b5b;
     }
+    & button {
+      border: 1px solid #ededed;
+      background-color: white;
+      font: 400 13px 'Montserrat';
+      line-height: 16px;
+      color: #1d1d1b;
+      height: 32px;
+      display: none;
+    }
+  }
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .news-container {
+    &__block {
+      flex-direction: column;
+
+      & > img {
+        width: auto;
+        height: auto;
+      }
+      & button {
+        display: block;
+      }
+
+      & .discription-block {
+        height: 115px;
+        overflow: hidden;
+        transition: all 2s;
+      }
+      & .discription-block.active {
+        height: auto;
+        transition: all 2s;
+      }
+    }
   }
 }
