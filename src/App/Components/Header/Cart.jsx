@@ -30,9 +30,18 @@ const Cart = () => {
     (state) => state.appReducer
   )
 
-  const [Modal, setModal] = useState(false)
+  const [getCartLocale, setGetCartLocale] = useState([])
+  useEffect(() => {
+    try {
+      const data = JSON.parse(localStorage.getItem('CartData'))
+      setGetCartLocale(data)
+    } catch (e) {
+      console.log(e)
+    }
+  }, [getCartData])
 
   // Modal useState start
+  const [Modal, setModal] = useState(false)
 
   const [name, setName] = useState('')
   // -------
@@ -105,11 +114,11 @@ const Cart = () => {
     } else dispatch(setFavourite(item))
   }
 
-  const cost = getCartData?.reduce(
+  const cost = getCartLocale?.reduce(
     (i, k) => i + (k.discount !== undefined && Number(k.discount * k.counter)),
     0
   )
-  const totalDiscount = getCartData?.reduce(
+  const totalDiscount = getCartLocale?.reduce(
     (i, k) => i + Number(k.price * k.counter),
     0
   )
@@ -266,11 +275,11 @@ const Cart = () => {
       )}
       {/* ----------------------------------- */}
       <div className="container">
-        {Boolean(getCartData.length !== 0) ? (
+        {Boolean(getCartLocale.length !== 0) ? (
           <div className="cart-container">
             <div className="cart-container__cartblock">
               <TransitionGroup className="cart-item-block">
-                {getCartData.map((item, index) => (
+                {getCartLocale.map((item, index) => (
                   <CSSTransition
                     key={index}
                     timeout={500}
@@ -336,14 +345,14 @@ const Cart = () => {
                 <div className="fdrow cart-container__orderitem">
                   <span>Количество линеек: </span>
                   <span>
-                    {getCartData?.reduce((i, k) => i + +k.counter, 0)} шт
+                    {getCartLocale?.reduce((i, k) => i + +k.counter, 0)} шт
                   </span>
                 </div>
                 {/* ---------- */}
                 <div className="fdrow cart-container__orderitem">
                   <span>Количество товаров: </span>
                   <span>
-                    {getCartData?.reduce(
+                    {getCartLocale?.reduce(
                       (i, k) => i + Number(k.counter * k.count),
                       0
                     )}{' '}
@@ -366,7 +375,7 @@ const Cart = () => {
               <div className="fdrow cart-container__orderitem">
                 <span>Стоимость: </span>
                 <span>
-                  {getCartData?.reduce(
+                  {getCartLocale?.reduce(
                     (i, k) => i + Number(k.price * k.counter),
                     0
                   )}{' '}

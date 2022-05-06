@@ -182,7 +182,9 @@ const Header = ({ breadCrums, active, setActive }) => {
               <Link to="/cart">
                 <div className="header-second__block-favourite">
                   <div className="posr">
-                    {Boolean(getCartData.length !== 0) && <span />}
+                    {Boolean(
+                      JSON.parse(localStorage.getItem('CartData')).length !== 0
+                    ) && <span />}
                     <img alt="cart" src={require('../../assets/cart.png')} />
                   </div>
                   <a>Корзина</a>

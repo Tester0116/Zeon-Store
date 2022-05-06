@@ -56,6 +56,7 @@ export default function appReducer(state = initialState, action) {
         return item
       })
 
+      localStorage.setItem('CartData', JSON.stringify(item))
       return {
         ...state,
         getCartData: item,
@@ -76,6 +77,7 @@ export default function appReducer(state = initialState, action) {
         return item
       })
 
+      localStorage.setItem('CartData', JSON.stringify(item))
       return {
         ...state,
         getCartData: item,
@@ -89,6 +91,16 @@ export default function appReducer(state = initialState, action) {
       }
     // ------------------
     case DELCART_DATA:
+      localStorage.setItem(
+        'CartData',
+        JSON.stringify(
+          state.getCartData.filter(
+            (fav) =>
+              fav.id !== payload.id ||
+              fav.selectedColor !== payload.selectedColor
+          )
+        )
+      )
       return {
         ...state,
         getCartData: state.getCartData.filter(
@@ -104,6 +116,10 @@ export default function appReducer(state = initialState, action) {
       return { ...state, getFavourite: [...state.getFavourite, payload] }
     // ------------------
     case CART_DATA:
+      localStorage.setItem(
+        'CartData',
+        JSON.stringify([...state.getCartData, payload])
+      )
       return { ...state, getCartData: [...state.getCartData, payload] }
     // ------------------
     case COLLECTIONS_DATA:
