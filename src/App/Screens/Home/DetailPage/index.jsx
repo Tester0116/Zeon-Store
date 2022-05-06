@@ -52,15 +52,16 @@ const DetailPage = () => {
       counter: 1,
       selectedImg: imgUrl,
     }
+
     if (getCartData.length !== 0) {
-      //   // ----------
+      //    ----------
       if (
         getCartData?.find((i, k) => i.id === getDetailData.id) &&
         getCartData?.find((i, k) => i.selectedColor === colorClicked)
       )
         navigate('/cart')
       else dispatch(setCartData(body))
-      //   // ----------
+      //    ----------
     } else dispatch(setCartData(body))
   }
   // -----------------------------------------

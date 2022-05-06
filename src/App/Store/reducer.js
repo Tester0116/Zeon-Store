@@ -6,7 +6,6 @@ import {
   UNSET_FAVOURITE,
   EMPTY_CART_DATA,
   DETAILPAGE_DATA,
-  COLOR_CLICKED,
   SET_FAVOURITE,
   DELCART_DATA,
   SUPPORT_DATA,
@@ -45,7 +44,10 @@ export default function appReducer(state = initialState, action) {
     // ------------------
     case INCREMENT_COUNTER: {
       const item = state.getCartData.map((item) => {
-        if (item.id === action.payload) {
+        if (
+          item.id === action.payload.id &&
+          item.selectedColor === action.payload.selectedColor
+        ) {
           return {
             ...item,
             counter: item.counter + 1,
@@ -62,7 +64,10 @@ export default function appReducer(state = initialState, action) {
     // ------------------
     case DECREMENT_COUNTER: {
       const item = state.getCartData.map((item) => {
-        if (item.id === action.payload) {
+        if (
+          item.id === action.payload.id &&
+          item.selectedColor === action.payload.selectedColor
+        ) {
           return {
             ...item,
             counter: item.counter - 1,
@@ -88,7 +93,7 @@ export default function appReducer(state = initialState, action) {
         ...state,
         getCartData: state.getCartData.filter(
           (fav) =>
-            fav.id !== payload.id && fav.selectedColor !== payload.selectedColor
+            fav.id !== payload.id || fav.selectedColor !== payload.selectedColor
         ),
       }
     // ------------------

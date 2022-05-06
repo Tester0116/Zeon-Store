@@ -1,30 +1,29 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import { decrementCartCounter, incrementCartCounter } from '../../Store/action'
 
 import './_index.scss'
 
-const Counter = ({ index, count }) => {
-  // const [counter, setCount] = useState(1)
+const Counter = ({ item }) => {
   const dispatch = useDispatch()
-  const { getCartData } = useSelector((state) => state.appReducer)
 
-  const decrement = () => count !== 0 && dispatch(decrementCartCounter(index))
+  const decrement = () =>
+    item.counter !== 0 && dispatch(decrementCartCounter(item))
 
-  const increment = () => dispatch(incrementCartCounter(index))
+  const increment = () => dispatch(incrementCartCounter(item))
 
   return (
     <div className="counter-container">
-      <button onClick={decrement} disabled={count === 1}>
+      <button onClick={decrement} disabled={item.counter === 1}>
         <img
           src={require(`../../assets/${
-            count !== 1 ? 'minuse-inactive-icon' : 'minuse-icon'
+            item.counter !== 1 ? 'minuse-inactive-icon' : 'minuse-icon'
           }.png`)}
           alt="minuse-icon"
         />
       </button>
       <div className="counter-container__spanblock">
-        <span>{count}</span>
+        <span>{item.counter}</span>
       </div>
       <button onClick={increment}>
         <img src={require('../../assets/plus-icon.png')} alt="plus-icon" />

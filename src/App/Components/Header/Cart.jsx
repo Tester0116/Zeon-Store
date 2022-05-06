@@ -21,6 +21,7 @@ import {
 
 import 'react-phone-number-input/style.css'
 import './_cart.scss'
+import { db } from '../../config/fbConfig'
 
 const Cart = () => {
   const dispatch = useDispatch()
@@ -82,9 +83,7 @@ const Cart = () => {
     else if (city === '') setIsDisabled(true)
     else if (country === '') setIsDisabled(true)
     else if (!checked) setIsDisabled(true)
-    else {
-      setIsDisabled(false)
-    }
+    else setIsDisabled(false)
   }, [
     name,
     secondName,
@@ -106,8 +105,6 @@ const Cart = () => {
     } else dispatch(setFavourite(item))
   }
 
-  const [itemId, setItemId] = useState(-1)
-
   const cost = getCartData?.reduce(
     (i, k) => i + (k.discount !== undefined && Number(k.discount * k.counter)),
     0
@@ -116,6 +113,7 @@ const Cart = () => {
     (i, k) => i + Number(k.price * k.counter),
     0
   )
+
   return (
     <section>
       <Header breadCrums={[{ id: 0, text: 'Корзина' }]} />
@@ -314,7 +312,7 @@ const Cart = () => {
                           )}
                         </div>
                         {/* --- */}
-                        <Counter index={item.id} count={item?.counter} />
+                        <Counter item={item} />
                       </div>
                       <img
                         className="pointer"
