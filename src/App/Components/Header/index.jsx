@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { setCategoriesData, setSearchData } from '../../Store/action'
+import { getAuthFb } from '../../config/fbConfig'
 import Menu from './Menu'
 import './_index.scss'
 
@@ -83,7 +84,6 @@ const Header = ({ breadCrums, active, setActive }) => {
       )
     setSearchResult(results)
   }, [searchValue])
-
   return (
     <header className="parent-block">
       <div className="full-header">
@@ -102,10 +102,16 @@ const Header = ({ breadCrums, active, setActive }) => {
               </Link>
             </div>
             <div>
-              <span>Тел: </span>
-              <a style={{ color: '#393939' }} href="tel:+996 000 00 00 00">
-                +996 000 00 00 00
-              </a>
+              {JSON.parse(localStorage.getItem('Token')) === null ? (
+                <span onClick={getAuthFb}>dwed</span>
+              ) : (
+                <>
+                  <span>Тел: </span>
+                  <a style={{ color: '#393939' }} href="tel:+996 000 00 00 00">
+                    +996 000 00 00 00
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -133,7 +139,7 @@ const Header = ({ breadCrums, active, setActive }) => {
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}
               />
-              {focused && searchResult.length !== 0 && (
+              {focused && searchResult?.length !== 0 && (
                 <div
                   className="detail-block"
                   onClick={(e) => e.stopPropagation()}
@@ -170,7 +176,9 @@ const Header = ({ breadCrums, active, setActive }) => {
               <Link to="/favourite">
                 <div className="header-second__block-favourite header-second__block-dot">
                   <div className="posr">
-                    {Boolean(getFavourite.length !== 0) && <span />}
+                    {JSON.parse(localStorage.getItem('Favourite')) !== null &&
+                      JSON.parse(localStorage.getItem('Favourite')).length !==
+                        0 && <span />}
                     <img
                       alt="favourite"
                       src={require('../../assets/favourite.png')}
@@ -182,9 +190,9 @@ const Header = ({ breadCrums, active, setActive }) => {
               <Link to="/cart">
                 <div className="header-second__block-favourite">
                   <div className="posr">
-                    {Boolean(
-                      JSON.parse(localStorage.getItem('CartData')).length !== 0
-                    ) && <span />}
+                    {JSON.parse(localStorage.getItem('CartData')) !== null &&
+                      JSON.parse(localStorage.getItem('CartData')).length !==
+                        0 && <span />}
                     <img alt="cart" src={require('../../assets/cart.png')} />
                   </div>
                   <a>Корзина</a>

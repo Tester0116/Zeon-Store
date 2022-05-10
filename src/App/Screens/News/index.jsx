@@ -50,7 +50,7 @@ const News = () => {
 
   return (
     <section>
-      <Header breadCrums={[{ id: 0, text: 'Публичная оферта' }]} />
+      <Header breadCrums={[{ id: 0, text: 'Новости' }]} />
 
       <div className="container">
         <div className="news-container">

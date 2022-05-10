@@ -85,6 +85,12 @@ export default function appReducer(state = initialState, action) {
     }
     // ------------------
     case UNSET_FAVOURITE:
+      localStorage.setItem(
+        'Favourite',
+        JSON.stringify(
+          state.getFavourite.filter((fav) => fav.id !== payload.id)
+        )
+      )
       return {
         ...state,
         getFavourite: state.getFavourite.filter((fav) => fav.id !== payload.id),
@@ -113,6 +119,10 @@ export default function appReducer(state = initialState, action) {
       return { ...state, getCartData: payload }
     // ------------------
     case SET_FAVOURITE:
+      localStorage.setItem(
+        'Favourite',
+        JSON.stringify([...state.getFavourite, payload])
+      )
       return { ...state, getFavourite: [...state.getFavourite, payload] }
     // ------------------
     case CART_DATA:

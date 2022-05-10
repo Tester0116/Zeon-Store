@@ -22,20 +22,20 @@ const Menu = ({ active, setActive, setModal }) => {
             <Link to="/news">Новости</Link>
           </li>
           <li>
-            <Link to="/about">Коллекция</Link>
+            <Link to="/collections">Коллекция</Link>
           </li>
         </ul>
-        <div className="fdrow">
+        <Link to="/favourite" className="fdrow">
           <img
             src={require('../../assets/favourite.png')}
             alt="favourite icon"
           />
           <span>Избранное</span>
-        </div>
-        <div className="fdrow" style={{ marginTop: 20 }}>
+        </Link>
+        <Link to="/cart" className="fdrow" style={{ marginTop: 20 }}>
           <img src={require('../../assets/cart.png')} alt="favourite icon" />
           <span>Корзина</span>
-        </div>
+        </Link>
         <div className="menu__bottom">
           <b>Свяжитсь с нами:</b>
           <div className="fdrow">

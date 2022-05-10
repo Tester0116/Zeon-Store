@@ -350,5 +350,13 @@
 @media only screen and (max-width: 600px) {
   .cart-container {
     flex-direction: column;
+    &__orderblock {
+      min-width: 350px;
+    }
+  }
+  .favourite-container .hit-block {
+    display: flex;
+    flex-direction: column;
+    width: auto;
   }
 }

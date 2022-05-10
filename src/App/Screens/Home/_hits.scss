@@ -206,9 +206,9 @@
     }
     gap: 8px;
   }
-  .hit-container,
+
   .categories-container {
-    overflow: scroll;
+    overflow-y: scroll;
   }
   // ########## BENEFITS STYLE START ##########
   .benefit-block {

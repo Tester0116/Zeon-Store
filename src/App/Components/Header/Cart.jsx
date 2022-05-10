@@ -17,6 +17,13 @@ import {
   setFavourite,
   setDetailData,
   unSetCartData,
+  setBenefitData,
+  setCollectionsData,
+  setHomeBanner,
+  setNewsData,
+  setFreshData,
+  setHitData,
+  setLoad,
 } from '../../Store/action'
 
 import 'react-phone-number-input/style.css'
@@ -39,6 +46,43 @@ const Cart = () => {
       console.log(e)
     }
   }, [getCartData])
+
+  useEffect(() => {
+    // ----- Getting Collections Data -----
+    db.collection('Collections').onSnapshot((snapshot) => {
+      const coll = snapshot.docs.map((doc) => doc.data())
+      let time = 0
+      while (time <= 57) {
+        coll.splice(coll.length - 1, 0, coll[0])
+        time++
+      }
+      dispatch(setCollectionsData(coll))
+      // ---------- setting Hit Data ----------
+      const HitData = snapshot.docs.map((doc) =>
+        doc.data().allData.filter((i) => i.hit === true)
+      )
+      dispatch(setHitData(HitData[0]))
+
+      // ---------- setting Frsh Data ----------
+      const FreshData = snapshot.docs.map((doc) =>
+        doc.data().allData.filter((i) => i.new === true)
+      )
+      dispatch(setFreshData(FreshData[0]))
+    })
+    // ----- Getting Benefit Data -----
+    db.collection('Benefits').onSnapshot((snapshot) =>
+      dispatch(setBenefitData(snapshot.docs.map((doc) => doc.data())))
+    )
+    // ----- Getting Home Banner -----
+    db.collection('HomeBanner').onSnapshot((snapshot) =>
+      dispatch(setHomeBanner(snapshot.docs.map((doc) => doc.data())))
+    )
+    // ----- Getting News Data -----
+    db.collection('News').onSnapshot((snapshot) =>
+      dispatch(setNewsData(snapshot.docs.map((doc) => doc.data())))
+    )
+    setTimeout(() => dispatch(setLoad(false)), 5000)
+  }, [])
 
   // Modal useState start
   const [Modal, setModal] = useState(false)
@@ -264,6 +308,7 @@ const Cart = () => {
                   onClick={() => {
                     setSended(true)
                     dispatch(unSetCartData([]))
+                    localStorage.removeItem('CartData')
                   }}
                 >
                   Заказать
@@ -275,7 +320,7 @@ const Cart = () => {
       )}
       {/* ----------------------------------- */}
       <div className="container">
-        {Boolean(getCartLocale.length !== 0) ? (
+        {getCartLocale !== null && getCartLocale.length !== 0 ? (
           <div className="cart-container">
             <div className="cart-container__cartblock">
               <TransitionGroup className="cart-item-block">

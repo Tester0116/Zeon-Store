@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { Autoplay, Pagination, Keyboard, Mousewheel } from 'swiper'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { useSelector } from 'react-redux'
 
 import ScrollToTop from '../../Components/ScrollToTop'
-import CustomSlider from '../../Components/Slider'
 import Collections from './Collections'
 import Fresh from './Fresh'
 import Hits from './Hits'
@@ -19,10 +18,6 @@ const HomeIndex = ({ active, setActive }) => {
     (state) => state.appReducer
   )
   const [activeIndex, setactiveIndex] = useState(0)
-  const swiper = useSwiper()
-  const images = {
-    // benefit: { benefit },
-  }
 
   return (
     <>
